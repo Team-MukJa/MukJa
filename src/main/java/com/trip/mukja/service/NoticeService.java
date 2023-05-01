@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.trip.mukja.config.PageNavigation;
-import com.trip.mukja.dto.NoticeDTO;
+import com.trip.mukja.model.dto.NoticeDTO;
 
 
 

@@ -1,17 +1,19 @@
 package com.trip.mukja.service.impl;
 
-import com.trip.mukja.dto.MemberDTO;
+import java.util.Map;
+
+import com.trip.mukja.model.dto.MemberDTO;
+import com.trip.mukja.model.mapper.MemberMapper;
 import com.trip.mukja.service.MemberService;
 
 public class MemberServiceImpl implements MemberService {
 	
-	private static MemberService memberService = new MemberServiceImpl();
 	
-	private MemberServiceImpl() {
-	}
-	
-	public static MemberService getMemberService() {
-		return memberService;
+	private MemberMapper memberMapper;
+
+	public MemberServiceImpl(MemberMapper memberMapper) {
+		super();
+		this.memberMapper = memberMapper;
 	}
 
 	@Override
@@ -29,9 +31,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberDTO loginMember(String userId, String userPwd) throws Exception {
+	public MemberDTO loginMember(Map<String,String> map) throws Exception {
 //		return memberDao.loginMember(userId, userPwd);
-		return null;
+		return ;
 
 	}
 

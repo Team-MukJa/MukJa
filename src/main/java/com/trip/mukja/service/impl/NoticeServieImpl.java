@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.trip.mukja.config.PageNavigation;
 import com.trip.mukja.config.SizeConstant;
-import com.trip.mukja.dto.NoticeDTO;
+import com.trip.mukja.model.dto.NoticeDTO;
 import com.trip.mukja.service.NoticeService;
 
 public class NoticeServieImpl implements NoticeService {
