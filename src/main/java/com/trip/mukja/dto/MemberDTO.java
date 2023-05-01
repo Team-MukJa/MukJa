@@ -1,5 +1,12 @@
 package com.trip.mukja.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 public class MemberDTO {
 
 	private String userId;
@@ -8,59 +15,14 @@ public class MemberDTO {
 	private String emailId;
 	private String emailDomain;
 	private String joinDate;
+	private String salt;
+	private Role role;
 
-	public String getUserId() {
-		return userId;
+	private enum Role{
+		ADMIN, USER
 	}
+	
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getUserPwd() {
-		return userPwd;
-	}
-
-	public void setUserPwd(String userPwd) {
-		this.userPwd = userPwd;
-	}
-
-	public String getEmailId() {
-		return emailId;
-	}
-
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
-	}
-
-	public String getEmailDomain() {
-		return emailDomain;
-	}
-
-	public void setEmailDomain(String emailDomain) {
-		this.emailDomain = emailDomain;
-	}
-
-	public String getJoinDate() {
-		return joinDate;
-	}
-
-	public void setJoinDate(String joinDate) {
-		this.joinDate = joinDate;
-	}
-
-	@Override
-	public String toString() {
-		return "MemberDto [userId=" + userId + ", userName=" + userName + ", userPwd=" + userPwd + ", emailId="
-				+ emailId + ", emailDomain=" + emailDomain + ", joinDate=" + joinDate + "]";
-	}
 
 }
