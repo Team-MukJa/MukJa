@@ -9,14 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.trip.mukja.config.PageNavigation;
 import com.trip.mukja.config.SizeConstant;
-<<<<<<< HEAD
 import com.trip.mukja.model.dto.FileInfoDTO;
 import com.trip.mukja.model.dto.MemberDTO;
 import com.trip.mukja.model.dto.NoticeDTO;
 import com.trip.mukja.model.mapper.NoticeMapper;
-=======
 import com.trip.mukja.model.dto.NoticeDTO;
->>>>>>> origin/dev
 import com.trip.mukja.service.NoticeService;
 
 @Service

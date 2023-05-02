@@ -1,25 +1,27 @@
 package com.trip.mukja.service.impl;
 
+import com.trip.mukja.model.dto.SearchDTO;
+import com.trip.mukja.model.mapper.SearchMapper;
+import com.trip.mukja.service.SearchService;
+import org.springframework.stereotype.Service;
+
 import java.sql.SQLException;
 import java.util.List;
-
-import com.trip.mukja.model.dto.SearchDTO;
-import com.trip.mukja.service.SearchService;
+import java.util.Map;
 
 
+@Service
 public class SearchServiceImpl implements SearchService {
 
-	private static SearchService searchService = new SearchServiceImpl();
-	public static SearchService getInstance() {
-		return searchService;
+	private SearchMapper searchMapper;
+
+	public SearchServiceImpl(SearchMapper searchMapper) {
+		this.searchMapper = searchMapper;
 	}
-	private SearchServiceImpl() {
-	}
+
 	@Override
-	public List<SearchDTO> getSearchList(int areaCode, int contentTypeId, String keyword) throws SQLException {
-		// TODO Auto-generated method stub
-		
-		return null;
+	public List<SearchDTO> getSearchList(Map<String,Integer> map) throws SQLException {
+		return searchMapper.getSearchList(map);
 	}
 
 }

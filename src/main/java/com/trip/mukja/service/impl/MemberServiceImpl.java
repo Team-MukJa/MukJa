@@ -1,15 +1,12 @@
 package com.trip.mukja.service.impl;
 
-<<<<<<< HEAD
 import com.trip.mukja.model.dto.MemberDTO;
-=======
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import com.trip.mukja.model.dto.MemberDTO;
 import com.trip.mukja.model.mapper.MemberMapper;
->>>>>>> origin/dev
 import com.trip.mukja.service.MemberService;
 
 @Service
