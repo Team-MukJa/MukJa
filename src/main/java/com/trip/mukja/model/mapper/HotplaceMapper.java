@@ -5,7 +5,9 @@ import java.util.Map;
 
 import com.trip.mukja.model.dto.FileInfoDTO;
 import com.trip.mukja.model.dto.HotplaceDTO;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface HotplaceMapper {
 
 	void writeHotplace(HotplaceDTO hotplaceDTO);
