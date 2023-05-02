@@ -43,7 +43,9 @@
 - 여행 계획 구현 (진행 중)
 
 ## Swagger 실행화면
-<img width="1082" alt="image" src="https://user-images.githubusercontent.com/107923409/235693820-04043da4-8ee1-4125-9cdc-2edc4c003fbe.png">
+
+![image](/uploads/233a99f132aa05b7703faab8072552a4/image.png)
+![image](/uploads/1b50c160c162e88d2e39c1a082bea16d/image.png)
 
 ## ERD 다이어그램
 ![Image Pasted at 2023-4-14 17-15](https://user-images.githubusercontent.com/107923409/232202431-07efeb42-de16-44e1-b84f-1423378274d9.png)
