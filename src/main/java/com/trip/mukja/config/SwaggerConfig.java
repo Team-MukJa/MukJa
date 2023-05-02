@@ -26,6 +26,10 @@ public class SwaggerConfig {
 //	Swagger-UI 3.x 확인
 //	http://localhost:8080/{your-app-root}/swagger-ui/index.html
 	
+	
+	// Swagger 주소
+	// http://localhost/swagger-ui/index.html
+	
 	private String version = "V1";
 	private String title = "Mukja API " + version;
 	
