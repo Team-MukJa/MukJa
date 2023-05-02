@@ -1,6 +1,6 @@
 package com.trip.mukja.service;
 
-import com.trip.mukja.dto.MemberDTO;
+import com.trip.mukja.model.dto.MemberDTO;
 
 public interface MemberService {
 

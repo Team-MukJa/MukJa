@@ -3,7 +3,7 @@ package com.trip.mukja.service.impl;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.trip.mukja.dto.SearchDTO;
+import com.trip.mukja.model.dto.SearchDTO;
 import com.trip.mukja.service.SearchService;
 
 

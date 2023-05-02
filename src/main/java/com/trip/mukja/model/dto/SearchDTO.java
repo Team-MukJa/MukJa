@@ -1,4 +1,4 @@
-package com.trip.mukja.dto;
+package com.trip.mukja.model.dto;
 
 public class SearchDTO {
 

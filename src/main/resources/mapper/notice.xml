@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.trip.mukja.model.mapper.NoticeMapper">
+
+	<resultMap type="noticeDTO" id="notice">
+		<result column="notice_id" property="noticeId" />
+		<result column="user_id" property="userId" />
+		<result column="user_name" property="userName" />
+		<result column="subject" property="subject" />
+		<result column="content" property="content" />
+		<result column="hit" property="hit" />
+		<result column="register_time" property="registerTime" />
+	</resultMap>
+	
+<!-- 	<resultMap type="noticeDTO" id="viewNotice" extends="notice">
+		<collection property="fileInfos" column="notice_id" javaType="list" ofType="fileInfoDTO" select="fileInfoList"/>
+	</resultMap>
+	
+	<resultMap type="fileInfoDTO" id="file">
+		<result column="save_folder" property="saveFolder"/>
+		<result column="original_file" property="originalFile"/>
+		<result column="save_file" property="saveFile"/>
+	</resultMap> -->
+
+	<insert id="writeNotice" parameterType="noticeDTO">
+		insert into notice (user_id, subject, content, hit, register_time)
+		values (#{userId}, #{subject}, #{content}, 0, now())
+		<selectKey resultType="int" keyProperty="noticeId"
+			order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+
+	<!-- <insert id="registerFile" parameterType="boardDto"> insert into file_info 
+		(article_no, save_folder, original_file, save_file) values <foreach collection="fileInfos" 
+		item="fileinfo" separator=" , "> (#{noticeId}, #{fileinfo.saveFolder}, #{fileinfo.originalFile}, 
+		#{fileinfo.saveFile}) </foreach> </insert> -->
+
+	<sql id="search">
+		<if test="word != null and word != ''">
+			<if test="key == 'subject'">
+				and subject like concat('%', #{word}, '%')
+			</if>
+			<if test="key != 'subject'">
+				<!-- and ${key} = #{word} -->
+				and ${key} like concat('%', #{word}, '%')
+			</if>
+		</if>
+	</sql>
+
+	<select id="listNotice" parameterType="map" resultMap="notice">
+		select n.notice_id, n.user_id, n.subject, n.content, n.hit,
+		n.register_time, m.user_name
+		from notice n, members m
+		where n.user_id = m.user_id
+		<include refid="search"></include>
+		order by n.notice_id desc
+		limit #{start}, #{listsize}
+	</select>
+
+	<select id="getTotalNoticeCount" parameterType="map"
+		resultType="int">
+		select count(notice_id)
+		from notice
+		<where>
+			<include refid="search"></include>
+		</where>
+	</select>
+
+	<select id="getArticle" parameterType="int"
+		resultMap="viewArticle">
+		select n.notice_id, n.user_id, n.subject, n.content, n.hit,
+		n.register_time, m.user_name
+		from notice n, members m
+		where n.user_id = m.user_id
+		and n.notice_id = #{noticeId}
+	</select>
+
+	<!-- <select id="fileInfoList" resultMap="file"> select save_folder, original_file, 
+		save_file from file_info where n.notice_id = #{noticeId} </select> -->
+
+	<update id="updateHit" parameterType="int">
+		update notice
+		set hit = hit
+		+ 1
+		where notice_id = #{noticeId}
+	</update>
+
+	<update id="modifyNotice" parameterType="noticeDTO">
+		update notice
+		set subject
+		= #{subject}, content = #{content}
+		where notice_id = #{noticeId}
+	</update>
+
+	<delete id="deleteArticle" parameterType="int">
+		delete from notice
+		where notice_id = #{noticeId}
+	</delete>
+
+	<delete id="deleteFile" parameterType="int">
+		delete from file_info
+		where notice_id = #{noticeId}
+	</delete>
+
+
+
+
+</mapper>
