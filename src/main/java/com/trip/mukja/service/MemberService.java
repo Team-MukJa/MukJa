@@ -1,7 +1,10 @@
 package com.trip.mukja.service;
 
+<<<<<<< HEAD
+=======
 import java.util.Map;
 
+>>>>>>> origin/dev
 import com.trip.mukja.model.dto.MemberDTO;
 
 public interface MemberService {

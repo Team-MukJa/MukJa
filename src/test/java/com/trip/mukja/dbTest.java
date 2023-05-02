@@ -11,16 +11,50 @@ import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+<<<<<<< HEAD
+
+import com.trip.mukja.model.dto.NoticeDTO;
+import com.trip.mukja.model.mapper.NoticeMapper;
+=======
 import org.springframework.transaction.annotation.Transactional;
 
 import com.trip.mukja.model.dto.MemberDTO;
 import com.trip.mukja.model.mapper.MemberMapper;
+>>>>>>> origin/dev
 
 import lombok.extern.slf4j.Slf4j;
 
 
 @ExtendWith(SpringExtension.class)
 @MybatisTest
+<<<<<<< HEAD
+@Slf4j    
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+public class dbTest {
+    
+    @Autowired
+    private NoticeMapper noticeMapper;
+    
+    @Test
+    @DisplayName("Order Mapper Test")
+    public void test() {
+    	NoticeDTO noticeDTO = new NoticeDTO();
+		noticeDTO.setNoticeId(2);
+//		noticeDTO.setUserId("test");
+//		noticeDTO.setSubject("db연결");
+//		noticeDTO.setContent("dbdbdb");
+//		noticeDTO.setHit(0);
+        
+        log.debug("test");
+        NoticeDTO testNotice;
+        testNotice = noticeMapper.getNotice(1);
+		System.out.println(testNotice.toString());
+		log.debug(testNotice.toString());
+		assertThat(testNotice.getNoticeId()==(noticeDTO.getNoticeId()));
+    }
+    
+}
+=======
 @Slf4j	
 // 실제로 데이터베이스를 테스트 하기 위한 어노테이션
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -78,3 +112,4 @@ public class dbTest {
 	}
 	
 }
+>>>>>>> origin/dev
