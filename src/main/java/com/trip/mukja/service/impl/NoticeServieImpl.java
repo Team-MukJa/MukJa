@@ -48,16 +48,16 @@ public class NoticeServieImpl implements NoticeService {
 	@Override
 	public List<NoticeDTO> listNotice(Map<String, String> map) throws Exception {
 		Map<String, Object> param = new HashMap<String, Object>();
-		String key = map.get("key"); // write.jsp
-		if ("userid".equals(key))
-			key = "n.user_id";
-		param.put("key", key == null ? "" : key);
-		param.put("word", map.get("word") == null ? "" : map.get("word"));
-		int pgno = Integer.parseInt(map.get("pgno"));
-		int start = pgno * SizeConstant.LIST_SIZE - SizeConstant.LIST_SIZE;
-		param.put("start", start);
-		param.put("listsize", SizeConstant.LIST_SIZE);
-		return null;
+//		String key = map.get("key"); // write.jsp
+//		if ("userid".equals(key))
+//			key = "n.user_id";
+//		param.put("key", key == null ? "" : key);
+//		param.put("word", map.get("word") == null ? "" : map.get("word"));
+//		int pgno = Integer.parseInt(map.get("pgno"));
+//		int start = pgno * SizeConstant.LIST_SIZE - SizeConstant.LIST_SIZE;
+//		param.put("start", start);
+//		param.put("listsize", SizeConstant.LIST_SIZE);
+		return noticeMapper.listNotice(param);
 	}
 
 	@Override
@@ -107,8 +107,8 @@ public class NoticeServieImpl implements NoticeService {
 
 	@Override
 	public void deleteNotice(int noticeId) throws Exception {
-		List<FileInfoDTO> fileList = noticeMapper.fileInfoList(noticeId);
-		noticeMapper.deleteFile(noticeId);
+//		List<FileInfoDTO> fileList = noticeMapper.fileInfoList(noticeId);
+//		noticeMapper.deleteFile(noticeId);
 		noticeMapper.deleteNotice(noticeId);
 
 //		for(FileInfoDTO fileInfoDto : fileList) {

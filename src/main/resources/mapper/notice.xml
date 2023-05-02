@@ -55,9 +55,11 @@
 		n.register_time, m.user_name
 		from notice n, members m
 		where n.user_id = m.user_id
+<!-- 		
 		<include refid="search"></include>
 		order by n.notice_id desc
 		limit #{start}, #{listsize}
+		 -->
 	</select>
 
 	<select id="getTotalNoticeCount" parameterType="map"
@@ -69,13 +71,19 @@
 		</where>
 	</select>
 
-	<select id="getArticle" parameterType="int"
-		resultMap="viewArticle">
+	<select id="getNotice" parameterType="int"
+		resultMap="notice">
+		select *
+		from notice
+		where notice_id = #{noticeId}
+		
+<!-- 		
 		select n.notice_id, n.user_id, n.subject, n.content, n.hit,
 		n.register_time, m.user_name
 		from notice n, members m
 		where n.user_id = m.user_id
-		and n.notice_id = #{noticeId}
+		and n.notice_id = #{noticeId} 
+-->
 	</select>
 
 	<!-- <select id="fileInfoList" resultMap="file"> select save_folder, original_file, 
@@ -90,12 +98,11 @@
 
 	<update id="modifyNotice" parameterType="noticeDTO">
 		update notice
-		set subject
-		= #{subject}, content = #{content}
+		set subject	= #{subject}, content = #{content}
 		where notice_id = #{noticeId}
 	</update>
 
-	<delete id="deleteArticle" parameterType="int">
+	<delete id="deleteNotice" parameterType="int">
 		delete from notice
 		where notice_id = #{noticeId}
 	</delete>

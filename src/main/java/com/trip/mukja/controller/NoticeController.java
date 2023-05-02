@@ -23,9 +23,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.trip.mukja.model.dto.NoticeDTO;
 import com.trip.mukja.service.NoticeService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/notices")
 @CrossOrigin("*")
+//Swagger
+@Api(tags = { "공지사항 관리" })
 public class NoticeController {
 
 	private final Logger logger = LoggerFactory.getLogger(NoticeController.class);
@@ -43,6 +51,9 @@ public class NoticeController {
 //		return "redirect:/assets/notice.html";
 //	}
 
+	// Swagger
+	@ApiOperation(value = "공지사항 목록", notes = "공지사항 목록 API")
+	@ApiResponses({ @ApiResponse(code = 200, message = "공지사항목록 OK"), @ApiResponse(code = 500, message = "서버오류") })
 	// 리스트
 	@GetMapping
 	public ResponseEntity<?> noticeList() {
@@ -60,6 +71,9 @@ public class NoticeController {
 		}
 	}
 
+	// Swagger
+	@ApiOperation(value = "공지사항 작성", notes = "공지사항 작성 API")
+	@ApiResponses({ @ApiResponse(code = 200, message = "공지사항 작성 OK"), @ApiResponse(code = 500, message = "서버오류") })
 	// 작성
 	@PostMapping
 	public ResponseEntity<?> bookWrite(@RequestBody NoticeDTO noticeDTO) {
@@ -74,8 +88,13 @@ public class NoticeController {
 		}
 	}
 
+	// Swagger
+	@ApiOperation(value = "공지사항 상세보기", notes = "공지사항 상세보기 API")
+	@ApiResponses({ @ApiResponse(code = 200, message = "공지사항 상세보기 OK"), @ApiResponse(code = 500, message = "서버오류") })
+	@ApiImplicitParam(name = "noticeid", value = "글 번호", required = true, dataType = "int", paramType = "path")
 	// 상세보기
-	@GetMapping(value = "/{noticeid}")
+//	@GetMapping(value = "/{noticeid}")
+	@GetMapping("/{noticeid}")
 	public ResponseEntity<?> noticeInfo(@PathVariable("noticeid") int noticeId) {
 		logger.debug("noticeInfo noticeid : {}", noticeId);
 		try {
@@ -91,8 +110,12 @@ public class NoticeController {
 		}
 	}
 
+	// Swagger
+	@ApiOperation(value = "공지사항 수정", notes = "공지사항 수정 API")
+	@ApiResponses({ @ApiResponse(code = 200, message = "공지사항 수정 OK"), @ApiResponse(code = 500, message = "서버오류") })
+	@ApiImplicitParam(name = "noticeid", value = "글 번호", required = true, dataType = "int", paramType = "path")
 	// 업데이트
-	@PutMapping
+	@PutMapping(value = "/{noticeid}")
 	public ResponseEntity<?> noticeModify(@RequestBody NoticeDTO noticeDTO) {
 		logger.debug("noticeModify noticeDTO : {}", noticeDTO);
 		try {
@@ -106,6 +129,10 @@ public class NoticeController {
 
 	}
 
+	// Swagger
+	@ApiOperation(value = "공지사항 삭제", notes = "공지사항 삭제 API")
+	@ApiResponses({ @ApiResponse(code = 200, message = "공지사항 삭제 OK"), @ApiResponse(code = 500, message = "서버오류") })
+	@ApiImplicitParam(name = "noticeid", value = "글 번호", required = true, dataType = "int", paramType = "path")
 	// 삭제
 	@DeleteMapping(value = "/{noticeid}")
 	public ResponseEntity<?> noticeDelete(@PathVariable("noticeid") int noticeId) {
@@ -125,7 +152,5 @@ public class NoticeController {
 		e.printStackTrace();
 		return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
-	
 
 }
