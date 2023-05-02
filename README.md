@@ -29,29 +29,40 @@
 ## Manual
 
 ## 진행 사항
-1. 프로젝트 RE
+1. Spring Boot 프로젝트로 변경(완료)
 
-2. 핫플레이스(진행중)
-- 사용자가 여행한 장소에 대한 리뷰 게시판(여행 사진, 장소, 그 장소에 대한 평가 등 입력)
-- 카카오맵 검색을 이용해 검색에 대한 장소 리스트를 받는다
-- 검색에 나온 결과 중 한 값을 클릭 시 그 장소의 정보를 받아온다
-- 본문과 나머지 입력값들을 채운 후 저장버튼을 누를 시 게시물 등록
+2. MyBatis 연동 (완료)
 
+3. 스토리보드 작성 및 RESTful API 기반 설계 (완료)
 
-## erd 다이어그램
+4. 구현
+- 로그인(로그인, 로그아웃) / 회원가입(회원 추가,삭제,수정,조회) 구현 (완료)
+- 공지사항(등록,삭제, 수정, 조회) 구현 (완료)
+- 여행지 검색 구현 (완료)
+- 핫플레이스 (등록, 삭제, 수정, 조회) 구현 (완료)
+- 여행 계획 구현 (진행 중)
+
+## Swagger 실행화면
+<img width="1082" alt="image" src="https://user-images.githubusercontent.com/107923409/235693820-04043da4-8ee1-4125-9cdc-2edc4c003fbe.png">
+
+## ERD 다이어그램
 ![Image Pasted at 2023-4-14 17-15](https://user-images.githubusercontent.com/107923409/232202431-07efeb42-de16-44e1-b84f-1423378274d9.png)
 
-## 스토리보드
+## 스토리보드 및 API 설계
 
 - 메인화면
-    
-    ![Untitled](%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%2055a1d84db0684088a521edec679c21ef/Untitled.jpeg)
+
+
+  ![Untitled](https://user-images.githubusercontent.com/107923409/235691160-a5377e16-e673-4592-9499-a4a66f80a472.jpeg)
+
     
     - 화면 중간의 사진을 클릭하면 각 페이지로 이동한다.
 - 회원가입
-    
-    ![Untitled](%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%2055a1d84db0684088a521edec679c21ef/Untitled%201.jpeg)
-    
+        
+        
+    ![Untitled 1](https://user-images.githubusercontent.com/107923409/235690304-f637d2fc-6277-4385-9ca0-ad81fa89dc7c.jpeg)
+
+
     - 각 항목의 데이터를 입력하여 회원가입
     
     | Method | URL | 기능 | 예시 |
@@ -61,8 +72,10 @@
     | DELETE | /members/{user-id} | 회원탈퇴 |  |
 - 로그인
     
-    ![Untitled](%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%2055a1d84db0684088a521edec679c21ef/Untitled%202.jpeg)
     
+    ![Untitled 2](https://user-images.githubusercontent.com/107923409/235690351-6cebc143-305c-4d8b-b0c2-180b7cf0e21f.jpeg)
+
+
     - 아이디, 비밀번호 일치 확인을 통해 로그인
     - 아이디 저장 기능
     
@@ -71,15 +84,16 @@
     | GET | /members/login | 로그인 |  |
     | GET | /members/logout | 로그아웃 |  |
 - 마이페이지
-    
-    ![Untitled](%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%2055a1d84db0684088a521edec679c21ef/Untitled%203.jpeg)
+
+    ![Untitled 3](https://user-images.githubusercontent.com/107923409/235690375-b0829d8a-c230-44ae-a47d-9781f46d5501.jpeg)
     
     - 좌측에 회원의 정보가 표시된다.
     - 우측 여행 계획, 핫플레이스, 문의사항을 누르면 회원이 작성한 글만 보여주게 된다.
 - 여행지 검색
     
-    ![Untitled](%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%2055a1d84db0684088a521edec679c21ef/Untitled%204.jpeg)
     
+    ![Untitled 4](https://user-images.githubusercontent.com/107923409/235690405-2faf270e-0ceb-4b23-8f1a-a0813b30de5a.jpeg)
+
     - 시/도, 군/구, 여행 타입을 선택하고 키워드를 입력 한다음 검색을 한다
     - 해당하는 장소들을 마커형식과 좌측 리스트 형식으로 띄워준다.
     - 리스트와 마크에 마우스를 올리면 장소의 정보가 표시 된다.
@@ -89,17 +103,20 @@
     | GET | /searches/{sido}/{gogun}/{keyword} | 여행지 검색 |  |
 - 여행 계획
     - 여행 계획 리스트
-        
-        ![Untitled](%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%2055a1d84db0684088a521edec679c21ef/Untitled%205.jpeg)
-        
-        - 여행 계획을 위와 같은 형식으로 보여준다. 스크롤을 내리면 여행 계획들이 추가로 보여진다.
-        - 여행 계획에는 여행 계획 제목, 요약, 대표사진들이 보여진다.
-        - 해당 영역을 클릭했을때 여행 계획 보기로 이동한다.
-        - 글 번호를 전달
+
+    ![Untitled 5](https://user-images.githubusercontent.com/107923409/235690419-337c944c-b238-4de5-82e5-e2be8515ea85.jpeg)
+
+     - 여행 계획을 위와 같은 형식으로 보여준다. 스크롤을 내리면 여행 계획들이 추가로 보여진다.
+     - 여행 계획에는 여행 계획 제목, 요약, 대표사진들이 보여진다.
+     - 해당 영역을 클릭했을때 여행 계획 보기로 이동한다.
+     - 글 번호를 전달
+
+
     - 여행 계획 추가
         
-        ![Untitled](%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%2055a1d84db0684088a521edec679c21ef/Untitled%206.jpeg)
         
+      ![Untitled 6](https://user-images.githubusercontent.com/107923409/235690451-bda4104c-6cec-49c3-ba70-fbd5e076ffc9.jpeg)
+      
         - 아래 페이지바를 통하여 일차를 선택한다.
         - 여행지를 검색하면 오른쪽 지도에 마커형식과 여행지 형식으로 표시된다.
         - 리스트나 마커를 클릭하면 가장 좌측 형태로 여행지가 추가 된다.
@@ -107,13 +124,13 @@
         - 저장 버튼을 누르면 여행 계획이 저장된다.
     - 여행 계획 보기
         
-        ![Untitled](%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%2055a1d84db0684088a521edec679c21ef/Untitled%207.jpeg)
-        
+        ![Untitled 7](https://user-images.githubusercontent.com/107923409/235691333-9b193300-3ea0-443f-98cb-29ea10b60e35.jpeg)
+
         - 일차 별로 여행 계획을 보여준다.
     - 여행지 보기
         
-        ![Untitled](%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%2055a1d84db0684088a521edec679c21ef/Untitled%208.jpeg)
-        
+        ![Untitled 8](https://user-images.githubusercontent.com/107923409/235691361-17c74ebe-d286-41f3-a460-36a0bef09e1c.jpeg)
+
         - 여행지 사진이나 이름을 클릭하면 해당하는 여행지의 상세 정보를 보여준다.
     
     | Method | URL | 기능 | 예시 |
@@ -126,19 +143,19 @@
 - 핫플레이스
     - 핫플레이스 게시물 작성
         
-        ![Untitled](%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%2055a1d84db0684088a521edec679c21ef/Untitled%209.jpeg)
-        
+        ![Untitled 9](https://user-images.githubusercontent.com/107923409/235691390-575a1c6c-93c6-42b9-a03e-b34d5ef6f1fa.jpeg)
+
         - 위치 검색을 통해 작성하려고 하는 핫플레이스의 위치를 정해준다
         - 제목, 내용, 이미지 추가를 통해 게시물을 작성한다
     - 핫플레이스 게시물 목록
         
-        ![Untitled](%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%2055a1d84db0684088a521edec679c21ef/Untitled%2010.jpeg)
-        
+        ![Untitled 10](https://user-images.githubusercontent.com/107923409/235691411-cd4fbd47-0792-486c-914f-31a80c875274.jpeg)
+
         - 유저들이 작성한 핫플레이스 게시물들을 보여준다
     - 핫플레이스 게시물 상세보기
         
-        ![Untitled](%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%2055a1d84db0684088a521edec679c21ef/Untitled%2011.jpeg)
-        
+        ![Untitled 11](https://user-images.githubusercontent.com/107923409/235691451-ac140ab6-e3b3-47e9-9832-c29c43bfede9.jpeg)
+
         - 게시물을 클릭하면 게시물 내용을 상세하게 볼 수 있다
     
     | Method | URL | 기능 | 예시 |
@@ -152,18 +169,18 @@
 - 공지사항 / 문의
     - 공지사항 / 문의하기 작성
         
-        ![Untitled](%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%2055a1d84db0684088a521edec679c21ef/Untitled%2012.jpeg)
-        
+        ![Untitled 12](https://user-images.githubusercontent.com/107923409/235691475-7ea8bcb7-0355-4c09-bc8b-987137266e50.jpeg)
+
         - 관리자는 공지사항을 작성할 수 있다
         - 일반 유저의 경우에는 1:1 문의하기 게시물을 작성할 수 있다
     - 공지사항 목록
         
-        ![Untitled](%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%2055a1d84db0684088a521edec679c21ef/Untitled%2013.jpeg)
-        
+        ![Untitled 13](https://user-images.githubusercontent.com/107923409/235691495-4386f5e3-2a56-418e-9299-60d6bd96bd2a.jpeg)
+
     - 문의사항 목록
         
-        ![Untitled](%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%2055a1d84db0684088a521edec679c21ef/Untitled%2014.jpeg)
-        
+        ![Untitled 14](https://user-images.githubusercontent.com/107923409/235691514-47616c7d-8152-4996-ac06-7a5eebedc61b.jpeg)
+
     
     | Method | URL | 기능 | 예시 |
     | --- | --- | --- | --- |
@@ -175,6 +192,3 @@
 - 공통
     - 로그인 여부를 확인한다. (일단 session으로 진행)
         - 일반 사용자와 관리자를 구분한다.
-`
-
-
