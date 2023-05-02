@@ -35,19 +35,18 @@ public class DBConfig {
         return new HikariDataSource(hikariConfig());
     }
 
-//    @Bean
-//    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
-//        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-//        bean.setDataSource(dataSource);
-//        bean.setMapperLocations(applicationContext.getResources("classpath:/mapper/*.xml"));
-//        bean.setTypeAliasesPackage("com.hong.*.model");
-//
-//        return bean.getObject();
-//    }
-//
-//    @Bean
-//    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
-//        return new SqlSessionTemplate(sqlSessionFactory);
-//    }
+    @Bean
+    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+        bean.setDataSource(dataSource);
+        bean.setMapperLocations(applicationContext.getResources("classpath:/mapper/**/*.xml"));
+        bean.setTypeAliasesPackage("com.trip.mukja.model.dto");
+        return bean.getObject();
+    }
+
+    @Bean
+    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
+        return new SqlSessionTemplate(sqlSessionFactory);
+    }
 
 }
