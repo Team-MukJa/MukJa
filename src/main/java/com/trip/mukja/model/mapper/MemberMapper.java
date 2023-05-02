@@ -10,8 +10,11 @@ import com.trip.mukja.model.dto.MemberDTO;
 @Mapper
 public interface MemberMapper {
 	
-	MemberDTO loginMember(Map<String,String> map )throws SQLException;
+	MemberDTO loginMember(MemberDTO memberDTO )throws SQLException;
 	
+	int joinMember(MemberDTO memberDTO);
+	int deleteMember(String userId);
+	int modifyInfo(MemberDTO memberDTO);
 	MemberDTO getOne(String userId);
 	
 	

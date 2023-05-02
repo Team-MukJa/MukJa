@@ -2,10 +2,13 @@ package com.trip.mukja.service.impl;
 
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.trip.mukja.model.dto.MemberDTO;
 import com.trip.mukja.model.mapper.MemberMapper;
 import com.trip.mukja.service.MemberService;
 
+@Service
 public class MemberServiceImpl implements MemberService {
 	
 	
@@ -18,36 +21,37 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int idCheck(String userId) throws Exception {
-//		return memberDao.idCheck(userId);
 		return 1;
 
 	}
 
 	@Override
 	public int joinMember(MemberDTO memberDTO) throws Exception {
-//		return memberDao.joinMember(memberDTO);
-		return 1;
+		return memberMapper.joinMember(memberDTO);
 
 	}
 
 	@Override
-	public MemberDTO loginMember(Map<String,String> map) throws Exception {
-//		return memberDao.loginMember(userId, userPwd);
-		return ;
+	public MemberDTO loginMember(MemberDTO memberDTO) throws Exception {
+		return memberMapper.loginMember(memberDTO);
 
 	}
 
 	@Override
 	public int modifyInfo(MemberDTO memberDTO) {
-		return 0;
-//		return memberDao.modifyInfo(memberDTO);
+		return memberMapper.modifyInfo(memberDTO);
 
 	}
 
 	@Override
-	public void deleteMember(String userId) {
-//		memberDao.deleteMember(userId);
+	public int deleteMember(String userId) {
+		return memberMapper.deleteMember(userId);
 		
+	}
+
+	@Override
+	public MemberDTO getOne(String userId) {
+		return memberMapper.getOne(userId);
 	}
 
 }
