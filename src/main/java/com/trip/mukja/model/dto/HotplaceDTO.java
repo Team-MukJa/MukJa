@@ -1,5 +1,6 @@
 package com.trip.mukja.model.dto;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -7,6 +8,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@ApiModel(value="HotplaceDTO (핫플레이스 정보)")
 public class HotplaceDTO {
 
 	private int placeId;
