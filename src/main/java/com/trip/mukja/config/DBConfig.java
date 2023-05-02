@@ -41,7 +41,10 @@ public class DBConfig {
         bean.setDataSource(dataSource);
         bean.setMapperLocations(applicationContext.getResources("classpath:/mapper/**/*.xml"));
         bean.setTypeAliasesPackage("com.trip.mukja.model.dto");
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/dev
         return bean.getObject();
     }
 

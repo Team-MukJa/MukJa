@@ -1,5 +1,15 @@
 package com.trip.mukja.model.dto;
 
+<<<<<<< HEAD
+=======
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+>>>>>>> origin/dev
 public class SearchDTO {
 
 	//위도 
@@ -16,6 +26,7 @@ public class SearchDTO {
 	// 주소 2
 	String addr2;
 	
+<<<<<<< HEAD
 	public double getLatitude() {
 		return latitude;
 	}
@@ -57,6 +68,8 @@ public class SearchDTO {
 		return "SearchDTO [latitude=" + latitude + ", longitude=" + longitude + ", first_img=" + first_img + ", title="
 				+ title + ", addr1=" + addr1 + ", addr2=" + addr2 + "]";
 	}
+=======
+>>>>>>> origin/dev
 	
 	
 	

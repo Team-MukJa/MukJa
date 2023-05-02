@@ -1,51 +1,61 @@
 package com.trip.mukja.service.impl;
 
+<<<<<<< HEAD
 import com.trip.mukja.model.dto.MemberDTO;
+=======
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+import com.trip.mukja.model.dto.MemberDTO;
+import com.trip.mukja.model.mapper.MemberMapper;
+>>>>>>> origin/dev
 import com.trip.mukja.service.MemberService;
 
+@Service
 public class MemberServiceImpl implements MemberService {
 	
-	private static MemberService memberService = new MemberServiceImpl();
 	
-	private MemberServiceImpl() {
-	}
-	
-	public static MemberService getMemberService() {
-		return memberService;
+	private MemberMapper memberMapper;
+
+	public MemberServiceImpl(MemberMapper memberMapper) {
+		super();
+		this.memberMapper = memberMapper;
 	}
 
 	@Override
 	public int idCheck(String userId) throws Exception {
-//		return memberDao.idCheck(userId);
 		return 1;
 
 	}
 
 	@Override
 	public int joinMember(MemberDTO memberDTO) throws Exception {
-//		return memberDao.joinMember(memberDTO);
-		return 1;
+		return memberMapper.joinMember(memberDTO);
 
 	}
 
 	@Override
-	public MemberDTO loginMember(String userId, String userPwd) throws Exception {
-//		return memberDao.loginMember(userId, userPwd);
-		return null;
+	public MemberDTO loginMember(MemberDTO memberDTO) throws Exception {
+		return memberMapper.loginMember(memberDTO);
 
 	}
 
 	@Override
 	public int modifyInfo(MemberDTO memberDTO) {
-		return 0;
-//		return memberDao.modifyInfo(memberDTO);
+		return memberMapper.modifyInfo(memberDTO);
 
 	}
 
 	@Override
-	public void deleteMember(String userId) {
-//		memberDao.deleteMember(userId);
+	public int deleteMember(String userId) {
+		return memberMapper.deleteMember(userId);
 		
+	}
+
+	@Override
+	public MemberDTO getOne(String userId) {
+		return memberMapper.getOne(userId);
 	}
 
 }
