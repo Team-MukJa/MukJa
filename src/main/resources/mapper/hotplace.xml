@@ -59,12 +59,18 @@
 	</sql>
 
 	<select id="listHotplace" parameterType="map" resultMap="hotplace">
+		select *
+		from hot_place
+	
+	
+	<!-- 
 		select h.place_id, h.user_id, h.subject, h.content, h.hit,h.register_time, m.user_name
 		from hot_place h, members m
 		where h.user_id = m.user_id
+		 -->
 <!-- 		
 		<include refid="search"></include>
-		order by n.notice_id desc
+		order by h.place_id desc
 		limit #{start}, #{listsize}
 		 -->
 	</select>

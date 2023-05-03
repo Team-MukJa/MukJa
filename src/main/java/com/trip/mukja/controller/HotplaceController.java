@@ -89,7 +89,7 @@ public class HotplaceController {
     // Swagger
     @ApiOperation(value = "핫플레이스 수정", notes = "핫플레이스 수정 API")
     @ApiResponses({ @ApiResponse(code = 200, message = "핫플레이스 수정 OK"), @ApiResponse(code = 500, message = "서버오류") })
-    @ApiImplicitParam(name = "placeid", value = "게시물 번호", required = true, dataType = "int", paramType = "path")
+//    @ApiImplicitParam(name = "placeid", value = "게시물 번호", required = true, dataType = "int", paramType = "path")
     // 업데이트
     @PutMapping(value = "/{placeid}")
     public ResponseEntity<?> hotplaceModify(@RequestBody HotplaceDTO hotplaceDTO) {

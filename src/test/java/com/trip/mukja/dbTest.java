@@ -11,23 +11,16 @@ import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-<<<<<<< HEAD
+import org.springframework.transaction.annotation.Transactional;
 
 import com.trip.mukja.model.dto.NoticeDTO;
 import com.trip.mukja.model.mapper.NoticeMapper;
-=======
-import org.springframework.transaction.annotation.Transactional;
-
-import com.trip.mukja.model.dto.MemberDTO;
-import com.trip.mukja.model.mapper.MemberMapper;
->>>>>>> origin/dev
 
 import lombok.extern.slf4j.Slf4j;
 
 
 @ExtendWith(SpringExtension.class)
 @MybatisTest
-<<<<<<< HEAD
 @Slf4j    
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class dbTest {
@@ -54,62 +47,3 @@ public class dbTest {
     }
     
 }
-=======
-@Slf4j	
-// 실제로 데이터베이스를 테스트 하기 위한 어노테이션
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Transactional
-public class dbTest {
-	
-	@Autowired
-	private MemberMapper memberMapper;
-	
-	@Test
-    @DisplayName("login Mapper Test")
-	public void loginDB() {
-		MemberDTO memberDTO = new MemberDTO();
-		memberDTO.setUserId("admin");
-		memberDTO.setUserName("관리자");
-		memberDTO.setUserPwd("1234");
-		
-		log.debug("test");
-		MemberDTO testMember;
-		try {
-			testMember = memberMapper.loginMember(memberDTO);
-			System.out.println(testMember.toString());
-			log.debug(testMember.toString());
-			assertThat(testMember.getUserId().equals(memberDTO.getUserId()));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			log.debug("fail");
-			e.printStackTrace();
-		}
-	}
-	
-	@Test
-    @DisplayName("join Mapper Test")
-	public void joinDB() {
-		MemberDTO memberDTO = new MemberDTO();
-		memberDTO.setUserId("test");
-		memberDTO.setUserName("test");
-		memberDTO.setUserPwd("test");
-		memberDTO.setEmailDomain("gmail.com");
-		memberDTO.setEmailId("test");
-		memberDTO.setRole("사용자");
-		
-		MemberDTO testMember;
-		int cnt = memberMapper.joinMember(memberDTO);
-		assertThat(cnt == 1);
-	}
-	
-	@Test
-    @DisplayName("delete Mapper Test")
-	public void deleteDB() {
-
-		String userId = "test";
-		int cnt = memberMapper.deleteMember(userId);
-		assertThat(cnt == 1);
-	}
-	
-}
->>>>>>> origin/dev

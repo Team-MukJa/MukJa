@@ -1,5 +1,8 @@
 package com.trip.mukja.model.dto;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +18,7 @@ public class HotplaceDTO {
 	private String userId;
 	private String img;
 	private String subject;
-	private String tripDay;
+	private LocalDateTime tripDay;
 	private String category;
 	private String content;
 	private int hit;
