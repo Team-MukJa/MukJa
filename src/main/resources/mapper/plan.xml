@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.trip.mukja.model.mapper.PlanMapper">
+
+     <resultMap id="plan" type="planDTO">
+        <result column="plan_id" property="planId"/>
+        <result column="user_id" property="userId"/>
+        <result column="subject" property="subject"/>
+        <result column="content" property="content"/>
+        <result column="hit" property="hit"/>
+        <result column="like" property="like"/>
+        <result column="f_date" property="fDate"/>
+        <result column="l_date" property="lDate"/>
+        <result column="w_date" property="wDate"/>
+     </resultMap>
+     
+     
+     
+<!--     추후에 login시 user_id 정보를 가져와야함 -->
+    <insert id="makePlanner" parameterType="planDTO" >
+      insert into plan(subject,content,f_date,l_date)
+      values (#{subject},#{content},#{f_date},#{l_date})
+    </insert> 
+
+</mapper>

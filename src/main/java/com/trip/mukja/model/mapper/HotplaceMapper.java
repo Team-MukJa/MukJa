@@ -3,6 +3,8 @@ package com.trip.mukja.model.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.trip.mukja.model.dto.FileInfoDTO;
 import com.trip.mukja.model.dto.HotplaceDTO;
 import org.apache.ibatis.annotations.Mapper;

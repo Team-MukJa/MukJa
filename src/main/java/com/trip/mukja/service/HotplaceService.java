@@ -7,6 +7,7 @@ import com.trip.mukja.config.PageNavigation;
 import com.trip.mukja.model.dto.FileInfoDTO;
 import com.trip.mukja.model.dto.HotplaceDTO;
 
+
 public interface HotplaceService {
 
 	void writeHotplace(HotplaceDTO hotplaceDTO);
