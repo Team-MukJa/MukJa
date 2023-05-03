@@ -4,6 +4,8 @@
 
 <mapper namespace="com.trip.mukja.model.mapper.SearchMapper">
 
+  
+
     <resultMap id="search" type="searchDTO">
         <result column="latitude" property="latitude"/>
         <result column="longitude" property="longitude"/>
@@ -13,6 +15,7 @@
         <result column="addr2" property="addr2"/>
 
     </resultMap>
+
     <select id="getSearchList" parameterType="map" resultMap="search">
         select latitude,longitude,first_image,title,addr1,addr2
         from attraction_info

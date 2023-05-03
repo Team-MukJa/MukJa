@@ -1,5 +1,7 @@
 package com.trip.mukja.model.dto;
 
+import java.time.LocalDate;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +17,7 @@ public class PlanInfoDTO {
 	private String content;
 	private String x;
 	private String y;
-	private String day;
+	private LocalDate day;
 	
 
 }

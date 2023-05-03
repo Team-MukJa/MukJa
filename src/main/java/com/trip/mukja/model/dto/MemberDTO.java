@@ -1,6 +1,7 @@
 package com.trip.mukja.model.dto;
 
-import lombok.Builder;
+import java.time.LocalDate;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,7 @@ public class MemberDTO {
 	private String userPwd;
 	private String emailId;
 	private String emailDomain;
-	private String joinDate;
+	private LocalDate joinDate;
 	private String salt;
 	private String role;
 

@@ -9,4 +9,4 @@ import java.util.Map;
 
 public interface SearchService {
 	List<SearchDTO> getSearchList(Map<String,Integer> map)  throws SQLException;
-}
+	}
