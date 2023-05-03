@@ -4,7 +4,7 @@
 
 <mapper namespace="com.trip.mukja.model.mapper.PlanMapper">
 
-   <resultMap id="plan" type="planDTO">
+     <resultMap id="plan" type="planDTO">
         <result column="plan_id" property="planId"/>
         <result column="user_id" property="userId"/>
         <result column="subject" property="subject"/>
@@ -14,12 +14,14 @@
         <result column="f_date" property="fDate"/>
         <result column="l_date" property="lDate"/>
         <result column="w_date" property="wDate"/>
-        
      </resultMap>
+     
+     
+     
+<!--     추후에 login시 user_id 정보를 가져와야함 -->
     <insert id="makePlanner" parameterType="planDTO" >
-    <!-- 추후에 login시 user_id 정보를 가져와야함 -->
-      insert into plan (subject,content,f_date,l_date)
-      values subject = #{} and content = #{} and f_date = #{} and l_date = #{}
-    </insert>
+      insert into plan(subject,content,f_date,l_date)
+      values (#{subject},#{content},#{f_date},#{l_date})
+    </insert> 
 
 </mapper>
