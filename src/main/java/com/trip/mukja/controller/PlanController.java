@@ -16,13 +16,13 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 public class PlanController {
 
 	private PlanService planService ;
-
+	
 	public PlanController(PlanService planService) {
 		super();
 		this.planService = planService;
 	}
 
-	
+	// 여행계획
 	@PostMapping()
 	public ResponseEntity<?> makePlanner(@RequestBody PlanDTO planDTO){
 //		List<LocalDate> days = planService.get
