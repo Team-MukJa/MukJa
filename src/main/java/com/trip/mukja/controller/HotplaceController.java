@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// Swagger 주소
+// http://localhost/swagger-ui/index.html
 @RestController
 @RequestMapping("/places")
 @CrossOrigin("*")
