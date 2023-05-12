@@ -3,11 +3,11 @@
 # 🍕 먹고 , 🛌 자고 ! 즐거운 여행 ✈️
 국내 관광지 정보와 여행 계획 서비스를 제공하는 웹사이트
 
-##  Member 
+##  🔥 Member 🔥 
 
-|     |                  |   | [<img src = "https://avatars.githubusercontent.com/u/107923409?v=4" width =100>](https://github.com/SeungJun) |
+|[<img src = "https://avatars.githubusercontent.com/u/101040824?v=4" width=100>](https://github.com/1212Hong)|[<img src = "https://avatars.githubusercontent.com/u/46624130?v=4" width = 100>](https://github.com/soo0300)| [<img src = "https://avatars.githubusercontent.com/u/82308415?v=4" width = 100>](https://github.com/https://github.com/byunyc0124)  | [<img src = "https://avatars.githubusercontent.com/u/107923409?v=4" width =100>](https://github.com/SeungJun) |
 |:---:|------------------|---|:-------------------------------------------------------------------------------------------------------------:|
-| 김대홍 |김수진|변영채|                                                      홍승준                                                      |
+| 김대홍 |김수진|변영채|홍승준|
 
 </div>
 
@@ -21,10 +21,12 @@
 <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
 <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
  </div>
+ <div>
 <img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white">
 <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
 <img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white">
 <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+ </div>
 <div>
   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 </div>
