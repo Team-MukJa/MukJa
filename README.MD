@@ -5,7 +5,7 @@
 
 ##  🔥 Member 🔥 
 
-|     |                  |   | [<img src = "https://avatars.githubusercontent.com/u/107923409?v=4" width =100>](https://github.com/SeungJun) |
+|[<img src = "https://avatars.githubusercontent.com/u/101040824?v=4" width=100>](https://github.com/1212Hong)     |                  |   | [<img src = "https://avatars.githubusercontent.com/u/107923409?v=4" width =100>](https://github.com/SeungJun) |
 |:---:|------------------|---|:-------------------------------------------------------------------------------------------------------------:|
 | 김대홍 |김수진|변영채|                                                      홍승준                                                      |
 
