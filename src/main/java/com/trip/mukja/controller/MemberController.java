@@ -3,6 +3,8 @@ package com.trip.mukja.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -32,32 +34,24 @@ public class MemberController {
 		super();
 		this.memberService = memberService;
 	}
-
 	@ApiOperation(value = "로그인", notes = "아이디와 비밀번호를 확인하여 로그인", response = Map.class)
-	@GetMapping(value ="/user")
-	public ResponseEntity<?> loginMember(@RequestBody MemberDTO memberDTO) {
+
+	@PostMapping(value ="/login")
+	public ResponseEntity<String> loginMember(@RequestBody MemberDTO memberDTO) {
 		Map<String, Object> resultMap = new HashMap<>();
 
-		System.out.println("controller" + memberDTO.toString());
-		HttpStatus stauts = HttpStatus.OK;
+		String token = null;
 		try {
-			MemberDTO loginMember = memberService.loginMember(memberDTO);
-			if (loginMember != null) {
-				resultMap.put("message", SUCCESS);
-				stauts = HttpStatus.ACCEPTED;
-			} else {
-				resultMap.put("message", FAIL);
-				stauts = HttpStatus.ACCEPTED;
-			}
+			token = memberService.loginMember(memberDTO);
 		} catch (Exception e) {
-
+			throw new RuntimeException(e);
 		}
-		return new ResponseEntity<Map<String, Object>>(resultMap, stauts);
+		return ResponseEntity.ok().body(token);
 	}
 
 	@ApiOperation(value = "로그아웃", notes = "로그아웃", response = Map.class)
 	@ApiImplicitParam(name = "userId", value = "사용자 아이디", required = true, dataType = "String", paramType = "path")
-	@GetMapping(value = "/user/logout/{userId}")
+	@GetMapping(value = "/logout/{userId}")
 	public ResponseEntity<?> logoutMember(@PathVariable("userId") String userid) {
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.ACCEPTED;
@@ -74,20 +68,21 @@ public class MemberController {
 
 	// 회원 가입
 	@ApiOperation(value = "회원가입", notes = "회원가입", response = Map.class)
-	@PostMapping(value ="/user")
+	@PostMapping(value ="/join")
 	public String joinMember(@RequestBody MemberDTO memberDTO) {
 		try {
 			log.info("memberDTO info : {}", memberDTO);
 			int cnt = memberService.joinMember(memberDTO);
 			return cnt + "";
 		} catch (Exception e) {
+			log.info("회원가입 실패 " +e.getMessage());
 			return 0 + "";
 		}
 	}
 	
 	@ApiOperation(value = "회원탈퇴", notes = "회원탈퇴", response = Map.class)
 	@ApiImplicitParam(name = "userId", value = "사용자 아이디", required = true, dataType = "String", paramType = "path")
-	@DeleteMapping("/user/{userId}")
+	@DeleteMapping("/")
 	public ResponseEntity<?> deleteMember(@PathVariable("userId") String userId) {
 		log.debug("탈퇴 아이디 : " + userId);
 		try {
@@ -101,7 +96,7 @@ public class MemberController {
 
 	
 	@ApiOperation(value = "회원정보수정", notes = "회원정보수정", response = Map.class)
-	@PutMapping(value ="/user/{userId}")
+	@PutMapping(value ="/")
     @ApiImplicitParam(name = "userId", value = "사용자 아이디", required = true, dataType = "string", paramType = "path")
 	public ResponseEntity<?> modifyMemberInfo(@RequestBody MemberDTO memberDTO) {
 		try {
@@ -114,7 +109,7 @@ public class MemberController {
 	}
 	
 	@ApiOperation(value = "회원정보가져오기", notes = "회원정보가져오기", response = Map.class)
-	@GetMapping(value ="/user/{userId}")
+	@GetMapping(value ="/{userId}")
 	@ApiImplicitParam(name = "userId", value = "사용자 아이디", required = true, dataType = "String", paramType = "path")
 	public ResponseEntity<?> getMemberInfo(@PathVariable("userId") String userId) {
 		try {

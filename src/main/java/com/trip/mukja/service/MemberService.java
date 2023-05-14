@@ -11,7 +11,7 @@ public interface MemberService {
 	
 	int joinMember(MemberDTO memberDTO) throws Exception;
 	
-	MemberDTO loginMember(MemberDTO memberDTO) throws Exception;
+	String loginMember(MemberDTO memberDTO) throws Exception;
 	
 	int modifyInfo(MemberDTO memberDTO);
 	
