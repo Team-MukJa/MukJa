@@ -51,7 +51,7 @@
 
 	<select id="getOne" parameterType="String" resultMap="member">
 		select
-		user_id, user_name
+		*
 		from members
 		where user_id =
 		#{userId}

@@ -3,6 +3,8 @@ package com.trip.mukja.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -38,8 +40,8 @@ public class MemberController {
 		super();
 		this.memberService = memberService;
 	}
-
 	@ApiOperation(value = "로그인", notes = "아이디와 비밀번호를 확인하여 로그인", response = Map.class)
+
 	@PostMapping(value ="/login")
 	public ResponseEntity<String> loginMember(@RequestBody MemberDTO memberDTO) {
 		Map<String, Object> resultMap = new HashMap<>();
