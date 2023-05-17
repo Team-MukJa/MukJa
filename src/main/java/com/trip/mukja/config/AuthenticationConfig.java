@@ -33,8 +33,10 @@ public class AuthenticationConfig {
                 .csrf().disable()
                 .cors().and()
                 .authorizeRequests()
-                .antMatchers("/members/join","/members/login").permitAll()
-                .antMatchers(HttpMethod.POST,"/**").authenticated()
+//                .antMatchers("/members/join","/members/login").permitAll()
+                .antMatchers("/**").permitAll()
+
+//                .antMatchers(HttpMethod.POST,"/**").authenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // jwt 사용하는 경우 씀
