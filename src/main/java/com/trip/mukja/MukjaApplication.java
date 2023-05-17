@@ -6,8 +6,13 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.ComponentScan;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+<<<<<<< HEAD
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.trip.mukja"})
+=======
+@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+//@ComponentScan(basePackages = {"com.trip.mukja"})
+>>>>>>> hotplace
 @EnableSwagger2
 public class MukjaApplication {
 
