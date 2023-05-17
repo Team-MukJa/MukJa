@@ -18,6 +18,7 @@
 		<result column="place_id" property="placeId" />
 		<result column="user_id" property="userId" />
 		<result column="subject" property="subject" />
+		<result column="register_time" property="registerTime" />
 		<result column="img" property="img" />
 	</resultMap>
 
@@ -25,6 +26,7 @@
 		<result column="notice_id" property="noticeId" />
 		<result column="user_id" property="userId" />
 		<result column="subject" property="subject" />
+		<result column="register_time" property="registerTime" />
 		<result column="user_name" property="userName" />
 	</resultMap>
 
@@ -36,13 +38,13 @@
 	</select>
 
 	<select id="getMyHotplace" parameterType="String" resultMap="hotplace">
-		select place_id, user_id, subject, img
+		select place_id, user_id, subject, img, register_time
 		from hot_place
 		where user_id = #{userId}
 	</select>
 
 	<select id="getMyNotice" parameterType="String" resultMap="notice">
-		select n.notice_id, n.user_id, n.subject, m.user_name
+		select n.notice_id, n.user_id, n.subject, n.register_time, m.user_name
 		from notice n, members m
 		where n.user_id = m.user_id
 		and n.user_id = #{userId}
