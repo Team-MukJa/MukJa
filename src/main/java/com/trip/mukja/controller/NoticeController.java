@@ -76,7 +76,7 @@ public class NoticeController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "공지사항 작성 OK"), @ApiResponse(code = 500, message = "서버오류") })
 	// 작성
 	@PostMapping
-	public ResponseEntity<?> bookWrite(@RequestBody NoticeDTO noticeDTO) {
+	public ResponseEntity<?> noticeWrite(@RequestBody NoticeDTO noticeDTO) {
 		logger.debug("noticeWrite noticeDTO : {}", noticeDTO);
 		try {
 			noticeService.writeNotice(noticeDTO);
@@ -100,6 +100,7 @@ public class NoticeController {
 		try {
 			NoticeDTO noticeDTO = noticeService.getNotice(noticeId);
 			if (noticeDTO != null) {
+				noticeService.updateHit(noticeId);
 				return new ResponseEntity<NoticeDTO>(noticeDTO, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);

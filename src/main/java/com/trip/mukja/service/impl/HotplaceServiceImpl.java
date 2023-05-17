@@ -60,7 +60,7 @@ public class HotplaceServiceImpl implements HotplaceService {
 
     @Override
     public void deleteHotplace(int placeId) {
-//        List<FileInfoDTO> fileList = hotplaceMapper.fileInfoList(noticeId);
+//      List<FileInfoDTO> fileList = hotplaceMapper.fileInfoList(noticeId);
 //		hotplaceMapper.deleteFile(placeId);
         hotplaceMapper.deleteHotplace(placeId);
 

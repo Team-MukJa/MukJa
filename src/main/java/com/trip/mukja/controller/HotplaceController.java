@@ -1,7 +1,6 @@
 package com.trip.mukja.controller;
 
 import com.trip.mukja.model.dto.HotplaceDTO;
-import com.trip.mukja.model.dto.NoticeDTO;
 import com.trip.mukja.service.HotplaceService;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -77,6 +76,7 @@ public class HotplaceController {
         logger.debug("hotplaceInfo placeid : {}", placeId);
         try {
             HotplaceDTO hotplaceDTO = hotplaceService.getHotplace(placeId);
+            hotplaceService.updateHit(placeId);
             if (hotplaceDTO != null) {
                 return new ResponseEntity<HotplaceDTO>(hotplaceDTO, HttpStatus.OK);
             } else {
