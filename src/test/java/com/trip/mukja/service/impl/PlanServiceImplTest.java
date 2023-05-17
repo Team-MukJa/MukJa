@@ -25,11 +25,13 @@ class PlanServiceImplTest {
 	void testGetDays() {
 		LocalDate fDate = LocalDate.now();
 		LocalDate lDate = fDate.plusDays(3);
-		
+
+		log.debug("시작 일 수 "+ fDate.toString());
 		List<LocalDate> list =planServiceImpl.getDays(fDate, lDate);
 		
 		for (LocalDate localDate : list) {
-			log.debug(localDate.toString());
+			log.debug("계산일수" + localDate.toString());
+			System.out.println(localDate.toString());
 		}
 	}
 
