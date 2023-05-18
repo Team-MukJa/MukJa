@@ -3,6 +3,7 @@ package com.trip.mukja.service.impl;
 import com.trip.mukja.model.dto.HotplaceDTO;
 import com.trip.mukja.model.dto.MemberDTO;
 import com.trip.mukja.model.dto.NoticeDTO;
+import com.trip.mukja.model.dto.ReviewDTO;
 import com.trip.mukja.model.mapper.MemberMapper;
 import com.trip.mukja.model.mapper.MypageMapper;
 import com.trip.mukja.service.MemberService;
@@ -34,7 +35,11 @@ public class MypageServiceImpl implements MypageService {
 
 	@Override
 	public List<NoticeDTO> getMyNotice(String userId) {
-		System.out.println("service");
 		return mypageMapper.getMyNotice(userId);
+	}
+
+	@Override
+	public List<ReviewDTO> getMyReview(String userId) {
+		return mypageMapper.getMyReview(userId);
 	}
 }

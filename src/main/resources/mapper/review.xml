@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.trip.mukja.model.mapper.ReviewMapper">
+
+	<resultMap type="gugunDTO" id="gugun">
+		<result column="gugun_code" property="gugunCode" />
+		<result column="gugun_name" property="gugunName" />
+	</resultMap>
+
+	<resultMap type="searchDTO" id="search" >
+		<result column="content_id" property="contentId"/>
+		<result column="content_type_id" property="contentTypeId"/>
+		<result column="title" property="title"/>
+		<result column="addr1" property="addr1"/>
+		<result column="addr2" property="addr2"/>
+		<result column="first_image" property="firstImage"/>
+		<result column="sido_code" property="sidoCode"/>
+		<result column="gugun_code" property="gugunCode"/>
+		<result column="latitude" property="latitude"/>
+		<result column="longitude" property="longitude"/>
+	</resultMap>
+
+	<resultMap type="searchDTO" id="searchAll" extends="search">
+		<result column="zipcode" property="zipcode"/>
+		<result column="tel" property="tel"/>
+	</resultMap>
+
+	<resultMap type="reviewDTO" id="review">
+		<result column="review_id" property="reviewId" />
+		<result column="place_id" property="placeId" />
+		<result column="user_id" property="userId" />
+		<result column="content" property="content" />
+		<result column="rating" property="rating" />
+		<result column="register_time" property="registerTime" />
+	</resultMap>
+
+	<resultMap type="reviewDTO" id="reviewAll" extends="review">
+		<result column="user_name" property="userName" />
+	</resultMap>
+
+	<select id="getGugun" parameterType="int" resultMap="gugun">
+		select gugun_code, gugun_name
+		from gugun
+		where sido_code = #{sidoCode}
+	</select>
+
+	<select id="getSearchList" parameterType="map" resultMap="search">
+		select *
+		from attraction_info
+		<where>
+			<if test="sidoCode != 0 and gugunCode != 0">
+				and sido_code = #{sidoCode}
+				and gugun_code = #{gugunCode}
+			</if>
+			<if test="contentTypeId != 0">
+				and content_type_id = #{contentTypeId}
+			</if>
+			<if test='!keyword.equals("null")'>
+				and title LIKE '%${keyword}%'
+			</if>
+		</where>
+	</select>
+
+	<select id="getRatingCount" parameterType="int" resultType="int">
+		select count(rating)
+		from review
+		where place_id = #{contentId}
+	</select>
+
+	<select id="getAvgRating" parameterType="int" resultType="int">
+		select avg(rating)
+		from review
+		where place_id = #{contentId}
+	</select>
+
+	<select id="getTour" parameterType="int" resultMap="searchAll">
+		select *
+		from attraction_info
+		where content_id = #{contentId}
+	</select>
+
+	<select id="getReviewList" parameterType="int" resultMap="reviewAll">
+		select r.review_id, r.place_id, r.user_id, r.content, r.rating, r.register_time, m.user_name
+		from review r, members m
+		where r.user_id = m.user_id
+		and r.place_id = #{contentId}
+	</select>
+
+	<select id="getMyReview" parameterType="map" resultMap="reviewAll">
+		select r.review_id, r.place_id, r.user_id, r.content, r.rating, r.register_time, m.user_name
+		from review r, members m
+		where r.user_id = m.user_id
+		and r.place_id = #{contentId}
+		and r.user_id = #{userId}
+	</select>
+
+	<insert id="writeReview" parameterType="reviewDTO">
+		insert into review (place_id, user_id, content, rating)
+		values (#{placeId}, #{userId}, #{content}, #{rating})
+		<selectKey resultType="int" keyProperty="reviewId"
+				   order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+
+	<update id="modifyReview" parameterType="reviewDTO">
+		update review
+		set content = #{content}, rating = #{rating}
+		where review_id = #{reviewId}
+	</update>
+
+	<select id="getReview" parameterType="int" resultMap="review">
+		select *
+		from review
+		where review_id = #{reviewId}
+	</select>
+
+	<delete id="deleteReview" parameterType="int">
+		delete from review
+		where review_id = #{reviewId}
+	</delete>
+
+
+</mapper>
