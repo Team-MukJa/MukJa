@@ -30,6 +30,16 @@
 		<result column="user_name" property="userName" />
 	</resultMap>
 
+	<resultMap type="reviewDTO" id="review">
+		<result column="review_id" property="reviewId" />
+		<result column="place_id" property="placeId" />
+		<result column="user_id" property="userId" />
+		<result column="content" property="content" />
+		<result column="rating" property="rating" />
+		<result column="register_time" property="registerTime" />
+		<result column="user_name" property="userName" />
+	</resultMap>
+
 	<select id="getUser" parameterType="String" resultMap="member">
 		select
 		user_id, user_name, email_id, email_domain, join_date, role
@@ -48,6 +58,13 @@
 		from notice n, members m
 		where n.user_id = m.user_id
 		and n.user_id = #{userId}
+	</select>
+
+	<select id="getMyReview" parameterType="String" resultMap="review">
+		select r.review_id, r.place_id, r.user_id, r.content, r.rating, r.register_time, m.user_name
+		from review r, members m
+		where r.user_id = m.user_id
+		  and r.user_id = #{userId}
 	</select>
 
 </mapper>

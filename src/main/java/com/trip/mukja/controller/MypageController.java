@@ -3,6 +3,7 @@ package com.trip.mukja.controller;
 import com.trip.mukja.model.dto.HotplaceDTO;
 import com.trip.mukja.model.dto.MemberDTO;
 import com.trip.mukja.model.dto.NoticeDTO;
+import com.trip.mukja.model.dto.ReviewDTO;
 import com.trip.mukja.service.MemberService;
 import com.trip.mukja.service.MypageService;
 import io.swagger.annotations.Api;
@@ -57,12 +58,23 @@ public class MypageController {
 		}
 	}
 
+	@ApiOperation(value = "리뷰 목록 가져오기", notes = "리뷰 목록 가져오기", response = Map.class)
+	@GetMapping(value ="/review/{userId}")
+	@ApiImplicitParam(name = "userId", value = "사용자 아이디", required = true, dataType = "String", paramType = "path")
+	public ResponseEntity<?> getReview(@PathVariable("userId") String userId) {
+		try {
+			List<ReviewDTO> reviewDTO = mypageService.getMyReview(userId);
+			return new ResponseEntity<List<ReviewDTO>>(reviewDTO, HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+
 	@ApiOperation(value = "문의사항 목록 가져오기", notes = "문의사항 목록 가져오기", response = Map.class)
 	@GetMapping(value ="/notice/{userId}")
 	@ApiImplicitParam(name = "userId", value = "사용자 아이디", required = true, dataType = "String", paramType = "path")
 	public ResponseEntity<?> getNotice(@PathVariable("userId") String userId) {
 		try {
-			System.out.println("controller");
 			List<NoticeDTO> noticeDTO = mypageService.getMyNotice(userId);
 			return new ResponseEntity<List<NoticeDTO>>(noticeDTO, HttpStatus.OK);
 		} catch (Exception e) {
