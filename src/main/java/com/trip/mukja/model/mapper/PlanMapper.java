@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.trip.mukja.model.dto.PlanDTO;
-import com.trip.mukja.model.dto.PlanInfoDTO;
+import com.trip.mukja.model.dto.plan.PlanDTO;
+import com.trip.mukja.model.dto.plan.PlanInfoDTO;
 
 @Mapper
 public interface PlanMapper {

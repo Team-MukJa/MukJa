@@ -1,4 +1,4 @@
-package com.trip.mukja.model.dto;
+package com.trip.mukja.model.dto.plan;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

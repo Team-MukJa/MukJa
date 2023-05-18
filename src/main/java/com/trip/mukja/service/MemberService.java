@@ -4,8 +4,9 @@ package com.trip.mukja.service;
 import java.util.Map;
 
 import com.trip.mukja.model.dto.MemberDTO;
-
 public interface MemberService {
+
+
 
 	int idCheck(String userId) throws Exception;
 	
