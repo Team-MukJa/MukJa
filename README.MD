@@ -16,7 +16,7 @@
 - 여행 계획과 나만의 핫플레이스르 작성해 공유하는 기능, 여행지를 검색하고 리뷰를 작성하는 기능을 제공한다.
 
 ## :heavy_check_mark: 기술 스택
-<div>
+<div >
 <img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white">
 <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
 <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">

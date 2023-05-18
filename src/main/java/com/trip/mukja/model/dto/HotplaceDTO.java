@@ -1,6 +1,5 @@
 package com.trip.mukja.model.dto;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import io.swagger.annotations.ApiModel;
