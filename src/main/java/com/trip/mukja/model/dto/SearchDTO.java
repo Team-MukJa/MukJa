@@ -12,19 +12,17 @@ import lombok.ToString;
 @ApiModel(value="SearchDTO (여행지 검색)")
 public class SearchDTO {
 
-	//위도 
-	double latitude;
-	// 경도 
-	double longitude;
-
-	// 이미지
-	String first_img;
-	// 제목
+	int contentId;
+	int contentTypeId;
 	String title;
-	// 주소  1
 	String addr1;
-	// 주소 2
 	String addr2;
-	
-	
+	String zipcode;
+	String tel;
+	String firstImage;
+	int sidoCode;
+	int gugunCode;
+	double latitude; // 위도
+	double longitude; // 경도
+
 }
