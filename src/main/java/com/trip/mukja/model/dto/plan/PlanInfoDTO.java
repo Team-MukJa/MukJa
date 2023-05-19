@@ -18,10 +18,13 @@ public class PlanInfoDTO {
 	private int planId;
 	private String img;
 	private String content;
+	private int contentId;
+	private String addr;
+	private String subject;
+
 	private String x;
 	private String y;
 	private LocalDateTime day;
 
 	
-
 }

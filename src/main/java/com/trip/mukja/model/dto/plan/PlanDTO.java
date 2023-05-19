@@ -26,19 +26,18 @@ public class PlanDTO {
 	private int hit;
 	private int like;
 
-	private String startDate;
-	private String endDate;
-
 	private LocalDateTime fDate;
 	private LocalDateTime lDate;
 	private LocalDateTime wDate;
+
+	private String startDate;
+	private String endDate;
 
 	public void getLocalDateTime() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		// selectedDate를 LocalDateTime으로 변환하여 반환
 		fDate =  LocalDateTime.parse(startDate+" 00:00:00",formatter);
 		lDate =  LocalDateTime.parse(endDate+" 00:00:00",formatter);
-
 	}
 	
 
