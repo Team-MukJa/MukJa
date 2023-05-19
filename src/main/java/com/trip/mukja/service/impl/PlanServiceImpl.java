@@ -54,7 +54,10 @@ public class PlanServiceImpl implements PlanService {
 		return datesInRange;
 	}
 
-
+	@Override
+	public List<PlanInfoDTO> searchDestination(String keyword) {
+		return planMapper.searchDestination(keyword);
+	}
 
 
 }

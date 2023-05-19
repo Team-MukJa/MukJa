@@ -25,4 +25,5 @@ public interface PlanService {
 	
 	List<LocalDateTime> getDays(LocalDateTime fDate, LocalDateTime lDate);
 
+    List<PlanInfoDTO> searchDestination(String keyword);
 }

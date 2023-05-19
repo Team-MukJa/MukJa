@@ -15,13 +15,31 @@
         <result column="l_date" property="lDate"/>
         <result column="w_date" property="wDate"/>
      </resultMap>
-     
-     
-     
+
+    <resultMap id="planInfo" type="planInfoDTO">
+        <result column="info_no" property="infoNo"/>
+        <result column="plan_p_id" property="planId"/>
+        <result column="content_id" property="contentId"/>
+        <result column="img" property="img"/>
+        <result column="content" property="content"/>
+        <result column="subject" property="subject"/>
+        <result column="addr" property="addr"/>
+        <result column="x" property="x"/>
+        <result column="y" property="y"/>
+    </resultMap>
+
 <!--     추후에 login시 user_id 정보를 가져와야함 -->
     <insert id="makePlanner" parameterType="planDTO" >
       insert into plan(subject,content,f_date,l_date,user_id)
       values (#{subject},#{content},#{fDate},#{lDate},#{userId})
     </insert> 
+
+    <select id="searchDestination" parameterType="String" resultMap="planInfo">
+        select ai.content_id, ai.title subject, ai.addr1 addr, ai.first_image img, ad.overview content, ai.latitude x, ai.longitude y
+        from attraction_info ai, attraction_description ad
+        where ai.content_id = ad.content_id
+          and ai.content_type_id = 12 and ai.title LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
 
 </mapper>

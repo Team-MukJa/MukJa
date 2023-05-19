@@ -17,4 +17,7 @@ public interface PlanMapper {
 	int addPlanDetail(PlanInfoDTO planInfoDTO);
 	
 	List<PlanDTO> getList(String keyword) throws SQLException;
+
+    List<PlanInfoDTO> searchDestination(String keyword);
+
 }

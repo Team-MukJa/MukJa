@@ -2,6 +2,7 @@ package com.trip.mukja.controller;
 
 import com.trip.mukja.model.dto.plan.PlanCreateDTO;
 import com.trip.mukja.model.dto.plan.PlanDTO;
+import com.trip.mukja.model.dto.plan.PlanInfoDTO;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,11 +31,7 @@ public class PlanController {
     @PostMapping
     public ResponseEntity<?> makePlanner(@RequestBody PlanDTO planDTO) {
 
-        log.info("전 : planDto : {}",planDTO);
-
         planDTO.getLocalDateTime();
-        log.info("후 : planDto : {}",planDTO);
-
         planService.makePlanner(planDTO);
 
         List<LocalDateTime> travelDates = planService.getDays(planDTO.getFDate(),planDTO.getLDate());
@@ -43,8 +40,21 @@ public class PlanController {
         // 플래너를 생성한다.
 
         // 시작과 끝 날짜를 계산하여 값을 넘겨준다.
-        return ResponseEntity.ok().body("글등록 완료 등록이 완료 되었습니다.");
+        return ResponseEntity.ok().body(planDTO);
     }
+
+    @ApiOperation(value = "여행 플래너 검색", notes = "여행 플래너 검색 API")
+    @GetMapping("/search/{keyword}")
+    public ResponseEntity<?> searchByKeyword(@PathVariable String keyword){
+        if(keyword != null){
+            List<PlanInfoDTO> list = planService.searchDestination(keyword);
+            log.info("list : {}",list);
+        return ResponseEntity.ok().body(list);
+        }else
+            return ResponseEntity.ok().body("검색 실패");
+
+    }
+
 
 
 }
