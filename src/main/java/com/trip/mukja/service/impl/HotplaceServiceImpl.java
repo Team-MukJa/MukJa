@@ -2,11 +2,13 @@ package com.trip.mukja.service.impl;
 
 import com.trip.mukja.config.PageNavigation;
 import com.trip.mukja.config.SizeConstant;
+import com.trip.mukja.model.dto.FileInfoDTO;
 import com.trip.mukja.model.dto.HotplaceDTO;
 import com.trip.mukja.model.mapper.HotplaceMapper;
 import com.trip.mukja.service.HotplaceService;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,10 +29,13 @@ public class HotplaceServiceImpl implements HotplaceService {
         hotplaceMapper.writeHotplace(hotplaceDTO);
         System.out.println("글입력 후 dto : " + hotplaceDTO);
 
-//		List<FileInfoDTO> fileInfos = HotplaceDTO.getFileInfos();
-//		if (fileInfos != null && !fileInfos.isEmpty()) {
-//			hotplaceMapper.registerFile(hotplaceDTO);
-//		}
+		List<FileInfoDTO> fileInfos = hotplaceDTO.getFileInfos();
+		if (fileInfos != null && !fileInfos.isEmpty()) {
+            System.out.println("리스트 : ");
+            System.out.println(fileInfos);
+
+			hotplaceMapper.registerFile(hotplaceDTO);
+		}
     }
 
     @Override
@@ -60,8 +65,8 @@ public class HotplaceServiceImpl implements HotplaceService {
 
     @Override
     public void deleteHotplace(int placeId) {
-//      List<FileInfoDTO> fileList = hotplaceMapper.fileInfoList(noticeId);
-//		hotplaceMapper.deleteFile(placeId);
+      List<FileInfoDTO> fileList = hotplaceMapper.fileInfoList(placeId);
+		hotplaceMapper.deleteFile(placeId);
         hotplaceMapper.deleteHotplace(placeId);
 
 //		for(FileInfoDTO fileInfoDto : fileList) {
@@ -103,4 +108,6 @@ public class HotplaceServiceImpl implements HotplaceService {
     public void updateHit(int placeId) {
         hotplaceMapper.updateHit(placeId);
     }
+
+
 }

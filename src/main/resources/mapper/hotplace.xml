@@ -1,130 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.trip.mukja.model.mapper.HotplaceMapper">
 
-	<resultMap type="hotplaceDTO" id="hotplace">
-		<result column="place_id" property="placeId" />
-		<result column="register_time" property="registerTime" />
-		<result column="img" property="img" />
-		<result column="subject" property="subject" />
-		<result column="trip_day" property="tripDay" />
-		<result column="category" property="category" />
-		<result column="content" property="content" />
-		<result column="hit" property="hit" />
-		<result column="user_id" property="userId" />
-		<result column="place_name" property="placeName" />
-		<result column="place_address" property="placeAddress" />
-		<result column="place_x" property="placeX" />
-		<result column="place_y" property="placeY" />
-		<result column="like" property="like" />
-
-	</resultMap>
-	
-<!-- 	<resultMap type="noticeDTO" id="viewNotice" extends="notice">
-		<collection property="fileInfos" column="notice_id" javaType="list" ofType="fileInfoDTO" select="fileInfoList"/>
-	</resultMap>
-	
-	<resultMap type="fileInfoDTO" id="file">
-		<result column="save_folder" property="saveFolder"/>
-		<result column="original_file" property="originalFile"/>
-		<result column="save_file" property="saveFile"/>
-	</resultMap> -->
-
-	<insert id="writeHotplace" parameterType="hotplaceDTO">
-		insert into hot_place (register_time, img, subject, trip_day, category, content, hit, user_id, place_name, place_address, place_x, place_y, `like`)
-		values (now(), #{img}, #{subject}, #{tripDay}, #{category}, #{content}, 0, #{userId}, #{placeName}, #{placeAddress}, #{placeX}, #{placeY}, 0)
-		<selectKey resultType="int" keyProperty="placeId"
-			order="AFTER">
-			select last_insert_id()
-		</selectKey>
-	</insert>
-
-	<!-- <insert id="registerFile" parameterType="boardDto"> insert into file_info 
-		(article_no, save_folder, original_file, save_file) values <foreach collection="fileInfos" 
-		item="fileinfo" separator=" , "> (#{noticeId}, #{fileinfo.saveFolder}, #{fileinfo.originalFile}, 
-		#{fileinfo.saveFile}) </foreach> </insert> -->
-
-	<sql id="search">
-		<if test="word != null and word != ''">
-			<if test="key == 'subject'">
-				and subject like concat('%', #{word}, '%')
-			</if>
-			<if test="key != 'subject'">
-				<!-- and ${key} = #{word} -->
-				and ${key} like concat('%', #{word}, '%')
-			</if>
-		</if>
-	</sql>
-
-	<select id="listHotplace" parameterType="map" resultMap="hotplace">
-		select *
-		from hot_place
-	
-	
-	<!-- 
-		select h.place_id, h.user_id, h.subject, h.content, h.hit,h.register_time, m.user_name
-		from hot_place h, members m
-		where h.user_id = m.user_id
-		 -->
-<!-- 		
-		<include refid="search"></include>
-		order by h.place_id desc
-		limit #{start}, #{listsize}
-		 -->
-	</select>
-
-	<select id="getTotalHotplaceCount" parameterType="map"
-		resultType="int">
-		select count(place_id)
-		from hot_place
-		<where>
-			<include refid="search"></include>
-		</where>
-	</select>
-
-	<select id="getHotplace" parameterType="int"
-		resultMap="hotplace">
-		select *
-		from hot_place
-		where place_id = #{placeId}
-		
-<!-- 		
-		select n.notice_id, n.user_id, n.subject, n.content, n.hit,
-		n.register_time, m.user_name
-		from notice n, members m
-		where n.user_id = m.user_id
-		and n.notice_id = #{noticeId} 
--->
-	</select>
-
-	<!-- <select id="fileInfoList" resultMap="file"> select save_folder, original_file, 
-		save_file from file_info where n.notice_id = #{noticeId} </select> -->
-
-	<update id="updateHit" parameterType="int">
-		update hot_place
-		set hit = hit+ 1
-		where place_id = #{placeId}
-	</update>
-
-	<update id="modifyHotplace" parameterType="hotplaceDTO">
-		update hot_place
-		set subject	= #{subject}, content = #{content}
-		where place_id = #{placeId}
-	</update>
-
-	<delete id="deleteHotplace" parameterType="int">
-		delete from hot_place
-		where place_id = #{placeId}
-	</delete>
-
-	<delete id="deleteFile" parameterType="int">
-		delete from file_info
-		where place_id = #{placeId}
-	</delete>
+    <resultMap type="hotplaceDTO" id="hotplace">
+        <result column="place_id" property="placeId"/>
+        <result column="register_time" property="registerTime"/>
+        <result column="subject" property="subject"/>
+        <result column="trip_day" property="tripDay"/>
+        <result column="category" property="category"/>
+        <result column="content" property="content"/>
+        <result column="hit" property="hit"/>
+        <result column="user_id" property="userId"/>
+        <result column="place_name" property="placeName"/>
+        <result column="place_address" property="placeAddress"/>
+        <result column="place_x" property="placeX"/>
+        <result column="place_y" property="placeY"/>
+        <result column="like" property="like"/>
+        <result column="save_file" property="saveFile"/>
 
 
+    </resultMap>
+
+    <resultMap type="hotplaceDTO" id="viewHotplace" extends="hotplace">
+        <collection property="fileInfos" column="place_id" javaType="list" ofType="fileInfoDTO" select="fileInfoList"/>
+    </resultMap>
+
+    <resultMap type="fileInfoDTO" id="file">
+        <result column="save_folder" property="saveFolder"/>
+        <result column="original_file" property="originalFile"/>
+        <result column="save_file" property="saveFile"/>
+    </resultMap>
+
+    <insert id="writeHotplace" parameterType="hotplaceDTO">
+        insert into hot_place (register_time, img, subject, trip_day, category, content, hit, user_id, place_name,
+        place_address, place_x, place_y, `like`)
+        values (now(), #{img}, #{subject}, #{tripDay}, #{category}, #{content}, 0, #{userId}, #{placeName},
+        #{placeAddress}, #{placeX}, #{placeY}, 0)
+        <selectKey resultType="int" keyProperty="placeId"
+                   order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <insert id="registerFile" parameterType="hotplaceDTO">
+        insert into file_info(place_id, save_folder, original_file, save_file)
+        values
+        <foreach collection="fileInfos" item="fileinfo" separator=" , ">
+            (#{placeId}, #{fileinfo.saveFolder}, #{fileinfo.originalFile}, #{fileinfo.saveFile})
+        </foreach>
+    </insert>
+
+    <sql id="search">
+        <if test="word != null and word != ''">
+            <if test="key == 'subject'">
+                and subject like concat('%', #{word}, '%')
+            </if>
+            <if test="key != 'subject'">
+                <!-- and ${key} = #{word} -->
+                and ${key} like concat('%', #{word}, '%')
+            </if>
+        </if>
+    </sql>
+
+    <select id="listHotplace" parameterType="map" resultMap="hotplace">
+        select h.place_id, h.register_time, h.subject, h.trip_day, h.category, h.content, h.hit, h.user_id, h.place_name, h.place_address, h.place_x, h.place_y, h.like, f.save_file
+        from hot_place h, file_info f
+        where h.place_id=f.place_id
+
+
+        <!--
+            select h.place_id, h.user_id, h.subject, h.content, h.hit,h.register_time, m.user_name
+            from hot_place h, members m
+            where h.user_id = m.user_id
+             -->
+        <!--
+                <include refid="search"></include>
+                order by h.place_id desc
+                limit #{start}, #{listsize}
+                 -->
+    </select>
+
+    <select id="getTotalHotplaceCount" parameterType="map"
+            resultType="int">
+        select count(place_id)
+        from hot_place
+        <where>
+            <include refid="search"></include>
+        </where>
+    </select>
+
+    <select id="getHotplace" parameterType="int"
+            resultMap="viewHotplace">
+        select h.place_id, h.register_time, h.subject, h.trip_day, h.category, h.content, h.hit, h.user_id, h.place_name, h.place_address, h.place_x, h.place_y, h.like, f.save_file
+        from hot_place h, file_info f
+        where h.place_id = #{placeId}
+
+        <!--
+                select n.notice_id, n.user_id, n.subject, n.content, n.hit,
+                n.register_time, m.user_name
+                from notice n, members m
+                where n.user_id = m.user_id
+                and n.notice_id = #{noticeId}
+        -->
+    </select>
+
+    <select id="fileInfoList" resultMap="file">
+        select save_folder, original_file, save_file
+        from file_info
+        where place_id = #{placeId}
+    </select>
+
+    <update id="updateHit" parameterType="int">
+        update hot_place
+        set hit = hit + 1
+        where place_id = #{placeId}
+    </update>
+
+    <update id="modifyHotplace" parameterType="hotplaceDTO">
+        update hot_place
+        set subject = #{subject},
+            content = #{content}
+        where place_id = #{placeId}
+    </update>
+
+    <delete id="deleteHotplace" parameterType="int">
+        delete
+        from hot_place
+        where place_id = #{placeId}
+    </delete>
+
+    <delete id="deleteFile" parameterType="int">
+        delete
+        from file_info
+        where place_id = #{placeId}
+    </delete>
 
 
 </mapper>
