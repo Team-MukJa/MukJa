@@ -62,9 +62,14 @@ public class MemberController {
 			log.error("로그아웃 실패 : {}", e);
 			resultMap.put("message", e.getMessage());
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
+
+
+
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+
+
 
 	// 회원 가입
 	@ApiOperation(value = "회원가입", notes = "회원가입", response = Map.class)
