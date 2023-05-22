@@ -34,6 +34,7 @@
 		<result column="review_id" property="reviewId" />
 		<result column="place_id" property="placeId" />
 		<result column="user_id" property="userId" />
+		<result column="title" property="placeTitle" />
 		<result column="content" property="content" />
 		<result column="rating" property="rating" />
 		<result column="register_time" property="registerTime" />
@@ -61,10 +62,12 @@
 	</select>
 
 	<select id="getMyReview" parameterType="String" resultMap="review">
-		select r.review_id, r.place_id, r.user_id, r.content, r.rating, r.register_time, m.user_name
-		from review r, members m
-		where r.user_id = m.user_id
-		  and r.user_id = #{userId}
+		select r.review_id, r.place_id, ai.title, r.user_id, r.content, r.rating, r.register_time, m.user_name
+		from review r join members m
+		on r.user_id = m.user_id
+		join attraction_info ai
+		on r.place_id = ai.content_id
+		where r.user_id = #{userId}
 	</select>
 
 </mapper>
