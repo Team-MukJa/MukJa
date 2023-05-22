@@ -2,14 +2,17 @@ package com.trip.mukja.service.impl;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.trip.mukja.model.dto.plan.PlanCreateDTO;
 import org.springframework.stereotype.Service;
 
-import com.trip.mukja.model.dto.PlanDTO;
-import com.trip.mukja.model.dto.PlanInfoDTO;
+import com.trip.mukja.model.dto.plan.PlanDTO;
+import com.trip.mukja.model.dto.plan.PlanInfoDTO;
 import com.trip.mukja.model.mapper.PlanMapper;
 import com.trip.mukja.service.PlanService;
 
@@ -40,16 +43,21 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public List<LocalDate> getDays(LocalDate fDate, LocalDate lDate) {
-		List<LocalDate> days = new ArrayList<>();
-		// Period를 이용하여 두날짜의 차이를 구할 수 있다.
-		int size = Period.between(fDate, lDate).getDays();
-		for(int i = 0; i<= size; i++) {
-			days.add(fDate.plusDays(i));
+	public List<LocalDateTime> getDays(LocalDateTime fDate, LocalDateTime lDate) {
+		List<LocalDateTime> datesInRange = new ArrayList<>();
+		LocalDateTime currentDate = fDate;
+
+		while (!currentDate.isAfter(lDate)) {
+			datesInRange.add(currentDate);
+			currentDate = currentDate.plusDays(1);
 		}
-		return days;
+		return datesInRange;
 	}
 
-	
+	@Override
+	public List<PlanInfoDTO> searchDestination(String keyword) {
+		return planMapper.searchDestination(keyword);
+	}
+
 
 }

@@ -19,7 +19,6 @@ public class MemberDTO {
 	private String emailId;
 	private String emailDomain;
 	private LocalDate joinDate;
-	private String salt;
 	private String role;
 
 }

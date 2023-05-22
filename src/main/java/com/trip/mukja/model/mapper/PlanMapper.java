@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.trip.mukja.model.dto.PlanDTO;
-import com.trip.mukja.model.dto.PlanInfoDTO;
+import com.trip.mukja.model.dto.plan.PlanDTO;
+import com.trip.mukja.model.dto.plan.PlanInfoDTO;
 
 @Mapper
 public interface PlanMapper {
@@ -17,4 +17,7 @@ public interface PlanMapper {
 	int addPlanDetail(PlanInfoDTO planInfoDTO);
 	
 	List<PlanDTO> getList(String keyword) throws SQLException;
+
+    List<PlanInfoDTO> searchDestination(String keyword);
+
 }

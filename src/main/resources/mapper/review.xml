@@ -36,6 +36,10 @@
 		<result column="register_time" property="registerTime" />
 	</resultMap>
 
+	<resultMap type="reviewDTO" id="reviewAll" extends="review">
+		<result column="user_name" property="userName" />
+	</resultMap>
+
 	<select id="getGugun" parameterType="int" resultMap="gugun">
 		select gugun_code, gugun_name
 		from gugun
@@ -77,17 +81,19 @@
 		where content_id = #{contentId}
 	</select>
 
-	<select id="getReviewList" parameterType="int" resultMap="review">
-		select *
-		from review
-		where place_id = #{contentId}
+	<select id="getReviewList" parameterType="int" resultMap="reviewAll">
+		select r.review_id, r.place_id, r.user_id, r.content, r.rating, r.register_time, m.user_name
+		from review r, members m
+		where r.user_id = m.user_id
+		and r.place_id = #{contentId}
 	</select>
 
-	<select id="getMyReview" parameterType="map" resultMap="review">
-		select *
-		from review
-		where place_id = #{contentId}
-		and user_id = #{userId}
+	<select id="getMyReview" parameterType="map" resultMap="reviewAll">
+		select r.review_id, r.place_id, r.user_id, r.content, r.rating, r.register_time, m.user_name
+		from review r, members m
+		where r.user_id = m.user_id
+		and r.place_id = #{contentId}
+		and r.user_id = #{userId}
 	</select>
 
 	<insert id="writeReview" parameterType="reviewDTO">
