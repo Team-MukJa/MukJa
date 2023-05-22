@@ -32,15 +32,14 @@ public class PlanController {
     public ResponseEntity<?> makePlanner(@RequestBody PlanDTO planDTO) {
 
         planDTO.getLocalDateTime();
-        planService.makePlanner(planDTO);
 
-        List<LocalDateTime> travelDates = planService.getDays(planDTO.getFDate(),planDTO.getLDate());
+//        List<LocalDateTime> travelDates = planService.getDays(planDTO.getFDate(),planDTO.getLDate());
 
-        log.info("여행일자 목록 : {}",travelDates.toString());
+//        log.info("여행일자 목록 : {}",travelDates.toString());
         // 플래너를 생성한다.
 
         // 시작과 끝 날짜를 계산하여 값을 넘겨준다.
-        return ResponseEntity.ok().body(planDTO);
+        return ResponseEntity.ok().body(planService.makePlanner(planDTO));
     }
 
     @ApiOperation(value = "여행 플래너 검색", notes = "여행 플래너 검색 API")

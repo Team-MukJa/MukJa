@@ -29,10 +29,11 @@
     </resultMap>
 
 <!--     추후에 login시 user_id 정보를 가져와야함 -->
-    <insert id="makePlanner" parameterType="planDTO" >
-      insert into plan(subject,content,f_date,l_date,user_id)
-      values (#{subject},#{content},#{fDate},#{lDate},#{userId})
-    </insert> 
+    <insert id="makePlanner" parameterType="planDTO" useGeneratedKeys="true" keyProperty="planId"  keyColumn="plan_id">
+        insert into plan(subject, content, f_date, l_date, user_id)
+        values (#{subject}, #{content}, #{fDate}, #{lDate}, #{userId})
+    </insert>
+
 
     <select id="searchDestination" parameterType="String" resultMap="planInfo">
         select ai.content_id, ai.title subject, ai.addr1 addr, ai.first_image img, ad.overview content, ai.latitude x, ai.longitude y
