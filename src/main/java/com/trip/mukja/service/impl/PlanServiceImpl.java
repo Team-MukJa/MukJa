@@ -68,6 +68,12 @@ public class PlanServiceImpl implements PlanService {
 		return planMapper.getPlanners();
 	}
 
+	@Override
+	public List<String> getPlanImages(int planId) {
+
+		return planMapper.getPlanImages(planId);
+	}
+
 	// String의 day 를 localDatetime으로 전환
 	public static List<PlanInfoDTO> convertDayToDateTime(List<PlanInfoDTO> planInfos) {
 		List<PlanInfoDTO> convertedPlanInfos = new ArrayList<>();

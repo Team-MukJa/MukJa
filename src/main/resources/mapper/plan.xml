@@ -66,5 +66,12 @@
         from plan
     </select>
 
+    <select id="getPlanImages"  parameterType="int" resultType="String">
+        select img
+        from plan_info
+        where plan_p_id = ${planId}
+        limit 4
+    </select>
+
 
 </mapper>
