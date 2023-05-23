@@ -1,8 +1,8 @@
 package com.trip.mukja.model.mapper;
 
-import com.trip.mukja.model.dto.GugunDTO;
 import com.trip.mukja.model.dto.ReviewDTO;
 import com.trip.mukja.model.dto.SearchDTO;
+import com.trip.mukja.model.dto.SidoGugunCodeDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.sql.SQLException;
@@ -11,7 +11,8 @@ import java.util.Map;
 
 @Mapper
 public interface ReviewMapper {
-	List<GugunDTO> getGugun(int sidoCode) throws SQLException;
+	List<SidoGugunCodeDto> getSido() throws SQLException;
+	List<SidoGugunCodeDto> getGugunInSido(String sido) throws SQLException;
 	List<SearchDTO> getSearchList(Map<String, Object> params) throws SQLException;
 	int getRatingCount(int contentId) throws SQLException;
 	int getAvgRating(int contentId) throws SQLException;
