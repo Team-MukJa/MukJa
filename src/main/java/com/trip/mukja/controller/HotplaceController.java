@@ -7,8 +7,11 @@ import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,6 +24,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -68,7 +77,13 @@ public class HotplaceController {
         }
     }
 
-    private final String UPLOAD_PATH = "/upload";
+//    private final String UPLOAD_PATH = "/upload";
+
+    @Value("${file.path}")
+    private String uploadPath;
+
+    @Value("${file.imgPath}")
+    private String uploadImgPath;
 
     @ApiOperation(value = "핫플레이스 작성", notes = "핫플레이스 작성 API")
     @ApiResponses({@ApiResponse(code = 200, message = "핫플레이스 작성 OK"), @ApiResponse(code = 500, message = "서버오류")})
@@ -92,14 +107,17 @@ public class HotplaceController {
 //		    String realPath = servletContext.getRealPath("/resources/img");
 
             // 프로젝트 폴더에 저장하기 위해 절대경로를 설정 (Window 의 Tomcat 은 Temp 파일을 이용한다)
-            String absolutePath = new File("").getAbsolutePath() + "\\";
-
+//            String absolutePath = new File("").getAbsolutePath() + "\\";
+//            System.out.println("절대 경로 : " + absolutePath);
             String today = new SimpleDateFormat("yyMMdd").format(new Date());
 //          String saveFolder = realPath + File.separator + today;
 //            String saveFolder = absolutePath + "hotplaceimages" + File.separator + today;
-            String saveFolder = absolutePath + "hotplaceimages"; // today 날짜 폴더 없애기
+//            String saveFolder = absolutePath + "hotplaceimages"; // today 날짜 폴더 없애기
+            String saveFolder = uploadImgPath + File.separator + today;; // today 날짜 폴더 없애기
 
-            logger.debug("저장 폴더 : {}", saveFolder);
+
+
+            logger.info("저장 폴더 : {}", saveFolder);
 
             File folder = new File(saveFolder);
             if (!folder.exists()) {
@@ -143,81 +161,6 @@ public class HotplaceController {
         }
     }
 
-    // Swagger
-//    @ApiOperation(value = "핫플레이스 작성", notes = "핫플레이스 작성 API")
-//    @ApiResponses({@ApiResponse(code = 200, message = "핫플레이스 작성 OK"), @ApiResponse(code = 500, message = "서버오류")})
-//    // 작성
-//    @PostMapping
-//    public ResponseEntity<String> hotplaceWrite(
-////            @RequestBody HotplaceDTO hotplaceDTO
-//            @RequestParam("userId") String userId,
-//            @RequestParam("subject") String subject,
-//            @RequestParam("tripDay") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate tripDay,
-//            @RequestParam("content") String content,
-////            @RequestParam("placeName") String placeName,
-////            @RequestParam("placeAddress") String placeAddress,
-////            @RequestParam("placeX") String placeX,
-////            @RequestParam("placeY") String placeY
-//            @RequestParam("file") List<MultipartFile> files
-//
-//    ) throws IOException {
-//
-////        logger.debug("hotplaceWrite hotplaceDTO : {}", hotplaceDTO);
-//        System.out.println(files);
-//        //	FileUpload 관련 설정.
-//        logger.debug("MultipartFile.isEmpty : {}", files.isEmpty());
-//
-//        //핫플레이스 DTO에 값 넣기
-//        HotplaceDTO hotplaceDTO = new HotplaceDTO(userId, subject, tripDay, content, "테스트장소", "광주 광산구", "14.333", "14.333");
-//        if (!files.isEmpty()) {
-////          String realPath = servletContext.getRealPath(UPLOAD_PATH);
-////		    String realPath = servletContext.getRealPath("/resources/img");
-//
-//            // 프로젝트 폴더에 저장하기 위해 절대경로를 설정 (Window 의 Tomcat 은 Temp 파일을 이용한다)
-//            String absolutePath = new File("").getAbsolutePath() + "\\";
-//
-//            String today = new SimpleDateFormat("yyMMdd").format(new Date());
-////          String saveFolder = realPath + File.separator + today;
-//            String saveFolder = absolutePath + File.separator + today;
-//
-//            logger.debug("저장 폴더 : {}", saveFolder);
-//
-//            File folder = new File(saveFolder);
-//            if (!folder.exists()) {
-//                // mkdir() 함수와 다른 점은 상위 디렉토리가 존재하지 않을 때 그것까지 생성
-//                folder.mkdirs();
-//            }
-//            // 반환을 할 파일 리스트
-//            List<FileInfoDTO> fileInfos = new ArrayList<FileInfoDTO>();
-//
-//            for (MultipartFile mfile : files) {
-//                FileInfoDTO fileInfoDto = new FileInfoDTO();
-//                String originalFileName = mfile.getOriginalFilename();
-//                if (!originalFileName.isEmpty()) {
-//                    // UUID 고유 식별자 + 파일 이름 + 확장자
-//                    String saveFileName = UUID.randomUUID().toString()
-//                            + originalFileName.substring(originalFileName.lastIndexOf('.'));
-//
-//                    fileInfoDto.setSaveFolder(today);
-//                    fileInfoDto.setOriginalFile(originalFileName);
-//                    fileInfoDto.setSaveFile(saveFileName);
-//                    logger.debug("원본 파일 이름 : {}, 실제 저장 파일 이름 : {}", mfile.getOriginalFilename(), saveFileName);
-//                    mfile.transferTo(new File(folder, saveFileName));
-//                }
-//                fileInfos.add(fileInfoDto);
-//            }
-//
-//            hotplaceDTO.setFileInfos(fileInfos);
-//        }
-//
-//        try {
-//            hotplaceService.writeHotplace(hotplaceDTO);
-//            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
-//
-//        } catch (Exception e) {
-//            return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
-//        }
-//    }
 
     // Swagger
     @ApiOperation(value = "핫플레이스 상세보기", notes = "핫플레이스 상세보기 API")
@@ -279,35 +222,7 @@ public class HotplaceController {
 
     }
 
-    @GetMapping(value = "image/{imagepath}")
-    public ResponseEntity<Resource> getImage(@PathVariable String imagepath) throws IOException {
-        // 이미지 파일을 읽어온 후 ResponseEntity로 반환합니다.
-        // imageName을 사용하여 이미지 파일을 읽어올 수 있습니다.
 
-        // 예시 코드:
-        String imageFilePath = "/hotplaces/" + imagepath;
-        File imageFile = new File(imageFilePath);
-        InputStreamResource resource = new InputStreamResource(new FileInputStream(imageFile));
-
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_JPEG_VALUE)
-                .contentLength(imageFile.length())
-                .body(resource);
-    }
-
-//    @ApiOperation(value = "feed image 조회 ", notes = "feed Image를 반환합니다. 못찾은경우 기본 image를 반환합니다.")
-//    @GetMapping(value = "image/{imagepath}")
-//    public ResponseEntity<Resource> userSearch(@PathVariable("imagepath") String imagepath) throws IOException {
-//        String imageFilePath = "/hotplaces/" + imagepath;
-//        System.out.println("들어옴?" + " " + imageFilePath);
-//        File imageFile = new File(imageFilePath);
-//        InputStreamResource resource = new InputStreamResource(new FileInputStream(imageFile));
-//
-//        return ResponseEntity.ok()
-//                .header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_JPEG_VALUE)
-//                .contentLength(imageFile.length())
-//                .body(resource);
-//    }
 
     private ResponseEntity<?> exceptionHandling(Exception e) {
         e.printStackTrace();

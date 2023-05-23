@@ -19,6 +19,7 @@
         <result column="place_y" property="placeY"/>
         <result column="like" property="like"/>
         <result column="save_file" property="saveFile"/>
+        <result column="save_folder" property="saveFolder"/>
 
 
     </resultMap>
@@ -65,7 +66,7 @@
     </sql>
 
     <select id="listHotplace" parameterType="map" resultMap="hotplace">
-        select h.place_id, h.register_time, h.subject, h.trip_day, h.category, h.content, h.hit, h.user_id, h.place_name, h.place_address, h.place_x, h.place_y, h.like, f.save_file
+        select h.place_id, h.register_time, h.subject, h.trip_day, h.category, h.content, h.hit, h.user_id, h.place_name, h.place_address, h.place_x, h.place_y, h.like, f.save_file, f.save_folder
         from hot_place h, file_info f
         where h.place_id=f.place_id
 

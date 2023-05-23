@@ -47,6 +47,7 @@ public class HotplaceDTO {
 
 	private List<FileInfoDTO> fileInfos;
 	private String saveFile;
+	private String saveFolder;
 
 //	public void getLocalDateTime() {
 //		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
