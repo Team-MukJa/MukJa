@@ -1,6 +1,6 @@
 package com.trip.mukja.service;
 
-import com.trip.mukja.model.dto.GugunDTO;
+import com.trip.mukja.model.dto.SidoGugunCodeDto;
 import com.trip.mukja.model.dto.ReviewDTO;
 import com.trip.mukja.model.dto.SearchDTO;
 
@@ -10,7 +10,7 @@ import java.util.Map;
 
 public interface ReviewService {
 
-	List<GugunDTO> getGugun(int sidoCode) throws SQLException;
+	List<SidoGugunCodeDto> getGugun(int sidoCode) throws SQLException;
 	List<SearchDTO> getSearchList(Map<String, Object> map) throws SQLException;
 	int getRatingCount(int contentId) throws SQLException;
 	int getAvgRating(int contentId) throws SQLException;
@@ -21,4 +21,8 @@ public interface ReviewService {
 	void modifyReview(ReviewDTO reviewDTO) throws SQLException;
 	ReviewDTO getReview(int reviewId) throws SQLException;
 	void deleteReview(int reviewId) throws SQLException;
+
+	public List<SidoGugunCodeDto> getSido() throws Exception ;
+
+	public List<SidoGugunCodeDto> getGugunInSido(String sido) throws Exception ;
 }

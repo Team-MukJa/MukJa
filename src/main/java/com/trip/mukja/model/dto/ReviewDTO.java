@@ -21,5 +21,6 @@ public class ReviewDTO {
 	private int rating;
 	private String registerTime;
 	private String userName;
+	private String placeName;
 
 }

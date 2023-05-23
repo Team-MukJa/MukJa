@@ -29,16 +29,41 @@
     </resultMap>
 
 <!--     추후에 login시 user_id 정보를 가져와야함 -->
-    <insert id="makePlanner" parameterType="planDTO" >
-      insert into plan(subject,content,f_date,l_date,user_id)
-      values (#{subject},#{content},#{fDate},#{lDate},#{userId})
-    </insert> 
+    <insert id="makePlanner" parameterType="planDTO" useGeneratedKeys="true" keyProperty="planId">
+        insert into plan(subject, content, f_date, l_date, user_id)
+        values (#{subject}, #{content}, #{fDate}, #{lDate}, #{userId})
+    </insert>
+
 
     <select id="searchDestination" parameterType="String" resultMap="planInfo">
         select ai.content_id, ai.title subject, ai.addr1 addr, ai.first_image img, ad.overview content, ai.latitude x, ai.longitude y
         from attraction_info ai, attraction_description ad
         where ai.content_id = ad.content_id
           and ai.content_type_id = 12 and ai.title LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <insert id="registDetailPlan" parameterType="java.util.List">
+        INSERT INTO plan_info (addr, content, content_id, day, img, memo, plan_p_id, subject, x, y)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.addr},
+            #{item.content},
+            #{item.contentId},
+            #{item.day},
+            #{item.img},
+            #{item.memo},
+            #{item.planId},
+            #{item.subject},
+            #{item.x},
+            #{item.y}
+            )
+        </foreach>
+    </insert>
+
+    <select id="getPlanners" resultMap="plan">
+        select *
+        from plan
     </select>
 
 
