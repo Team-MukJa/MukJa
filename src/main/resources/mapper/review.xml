@@ -20,11 +20,12 @@
 		<result column="gugun_code" property="gugunCode"/>
 		<result column="latitude" property="latitude"/>
 		<result column="longitude" property="longitude"/>
+		<result column="zipcode" property="zipcode"/>
+		<result column="tel" property="tel"/>
 	</resultMap>
 
 	<resultMap type="searchDTO" id="searchAll" extends="search">
-		<result column="zipcode" property="zipcode"/>
-		<result column="tel" property="tel"/>
+		<result column="overview" property="overview"/>
 	</resultMap>
 
 	<resultMap type="reviewDTO" id="review">
@@ -34,10 +35,8 @@
 		<result column="content" property="content" />
 		<result column="rating" property="rating" />
 		<result column="register_time" property="registerTime" />
-	</resultMap>
-
-	<resultMap type="reviewDTO" id="reviewAll" extends="review">
 		<result column="user_name" property="userName" />
+		<result column="title" property="placeName" />
 	</resultMap>
 
 	<select id="getGugun" parameterType="int" resultMap="gugun">
@@ -80,23 +79,28 @@
 	</select>
 
 	<select id="getTour" parameterType="int" resultMap="searchAll">
-		select *
-		from attraction_info
-		where content_id = #{contentId}
+		select ai.*, ad.overview
+		from attraction_info ai inner join attraction_description ad
+		on ai.content_id = ad.content_id
+		where ai.content_id = #{contentId}
 	</select>
 
-	<select id="getReviewList" parameterType="int" resultMap="reviewAll">
-		select r.review_id, r.place_id, r.user_id, r.content, r.rating, r.register_time, m.user_name
-		from review r, members m
-		where r.user_id = m.user_id
-		and r.place_id = #{contentId}
+	<select id="getReviewList" parameterType="int" resultMap="review">
+		select ai.title, r.review_id, r.place_id, r.user_id, r.content, r.rating, r.register_time, m.user_name
+		from review r inner join members m
+		on r.user_id = m.user_id
+		inner join attraction_info ai
+		on r.place_id = ai.content_id
+		where r.place_id = #{contentId}
 	</select>
 
-	<select id="getMyReview" parameterType="map" resultMap="reviewAll">
-		select r.review_id, r.place_id, r.user_id, r.content, r.rating, r.register_time, m.user_name
-		from review r, members m
-		where r.user_id = m.user_id
-		and r.place_id = #{contentId}
+	<select id="getMyReview" parameterType="map" resultMap="review">
+		select ai.title, r.review_id, r.place_id, r.user_id, r.content, r.rating, r.register_time, m.user_name
+		from review r inner join members m
+		on r.user_id = m.user_id
+		inner join attraction_info ai
+		on r.place_id = ai.content_id
+		where r.place_id = #{contentId}
 		and r.user_id = #{userId}
 	</select>
 
@@ -116,8 +120,11 @@
 	</update>
 
 	<select id="getReview" parameterType="int" resultMap="review">
-		select *
-		from review
+		select ai.title, r.*, m.user_name
+		from review r inner join members m
+		on r.user_id = m.user_id
+		inner join attraction_info ai
+		on r.place_id = ai.content_id
 		where review_id = #{reviewId}
 	</select>
 
