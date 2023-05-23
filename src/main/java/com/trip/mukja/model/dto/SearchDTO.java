@@ -24,5 +24,6 @@ public class SearchDTO {
 	int gugunCode;
 	double latitude; // 위도
 	double longitude; // 경도
+	String overview;
 
 }

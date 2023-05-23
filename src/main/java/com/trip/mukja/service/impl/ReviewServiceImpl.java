@@ -1,10 +1,11 @@
 package com.trip.mukja.service.impl;
 
-import com.trip.mukja.model.dto.GugunDTO;
+import com.trip.mukja.model.dto.SidoGugunCodeDto;
 import com.trip.mukja.model.dto.ReviewDTO;
 import com.trip.mukja.model.dto.SearchDTO;
 import com.trip.mukja.model.mapper.ReviewMapper;
 import com.trip.mukja.service.ReviewService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -12,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+
+@Slf4j
 public class ReviewServiceImpl implements ReviewService {
 
     private ReviewMapper reviewMapper;
@@ -20,9 +23,10 @@ public class ReviewServiceImpl implements ReviewService {
         this.reviewMapper = reviewMapper;
     }
 
+
     @Override
-    public List<GugunDTO> getGugun(int sidoCode) throws SQLException {
-        return reviewMapper.getGugun(sidoCode);
+    public List<SidoGugunCodeDto> getGugun(int sidoCode) throws SQLException {
+        return null;
     }
 
     @Override
@@ -73,5 +77,17 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void deleteReview(int reviewId) throws SQLException {
         reviewMapper.deleteReview(reviewId);
+    }
+
+    @Override
+    public List<SidoGugunCodeDto> getSido() throws Exception {
+        List<SidoGugunCodeDto> test = reviewMapper.getSido();
+        log.info("test : {}",test.toString());
+        return test;
+    }
+
+    @Override
+    public List<SidoGugunCodeDto> getGugunInSido(String sido) throws Exception {
+        return reviewMapper.getGugunInSido(sido);
     }
 }
