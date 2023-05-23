@@ -34,17 +34,25 @@
 		<result column="title" property="placeName" />
 	</resultMap>
 
-	<select id="getSido" resultType="sidoGugunCodeDto">
-		select left(sidoCode,2) sidoCode, sidoName
-		from sidocode
-		order by sidoCode
+
+	<resultMap type="sidoGugunCodeDto" id="sidogugun">
+		<result column="sido_code" property="sidoCode" />
+		<result column="sido_name" property="sidoName" />
+		<result column="gugun_code" property="gugunCode" />
+		<result column="gugun_name" property="gugunName" />
+
+	</resultMap>
+	<select id="getSido" resultMap="sidogugun">
+		select  sido_code , sido_name
+		from sido
+		order by sido_code
 	</select>
 
-	<select id="getGugunInSido" parameterType="string" resultType="sidoGugunCodeDto">
-		select left(gugunCode,5) gugunCode, gugunName
-		from guguncode
-		where left(gugunCode,2) = #{sido}
-		order by gugunCode
+	<select id="getGugunInSido" parameterType="string" resultMap="sidogugun">
+		select  gugun_code, gugun_name
+		from gugun
+		where sido_code = #{sido}
+		order by gugun_code
 	</select>
 
 	<select id="getSearchList" parameterType="map" resultMap="search">

@@ -76,7 +76,7 @@ public class ReviewController {
     @GetMapping("/review/{sidoCode}/{gugunCode}/{contentTypeId}/{keyword}")
     public ResponseEntity<?> getSearchList(@PathVariable("sidoCode") int sidoCode, @PathVariable("gugunCode") int gugunCode,
                                            @PathVariable("contentTypeId") List<Integer> contentTypeId, @PathVariable("keyword") String keyword) {
-        logger.debug("getSearchList sidoCode : {}, gugunCode : {}, contentTypeId : {}, keyword : {}", sidoCode, gugunCode, contentTypeId, keyword);
+        logger.info("getSearchList sidoCode : {}, gugunCode : {}, contentTypeId : {}, keyword : {}", sidoCode, gugunCode, contentTypeId, keyword);
         try {
             Map<String, Object> map = new HashMap<>();
             map.put("sidoCode", sidoCode);
@@ -84,7 +84,8 @@ public class ReviewController {
             map.put("contentTypeId", contentTypeId);
             map.put("keyword", keyword);
             List<SearchDTO> searchDTO = reviewService.getSearchList(map);
-            if (searchDTO != null) {
+            if (searchDTO.size()==0) {
+                logger.info("searchDTO : {}",searchDTO.toString());
                 return new ResponseEntity<List<SearchDTO>>(searchDTO, HttpStatus.OK);
             } else {
                 return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
