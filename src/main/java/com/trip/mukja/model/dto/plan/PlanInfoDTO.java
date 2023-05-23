@@ -24,7 +24,11 @@ public class PlanInfoDTO {
 
 	private String x;
 	private String y;
-	private LocalDateTime day;
+
+	private String day;
+	private LocalDateTime dayTime;
+
+	private String memo;
 
 	
 }

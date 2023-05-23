@@ -1,14 +1,11 @@
 package com.trip.mukja.service.impl;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.trip.mukja.model.dto.plan.PlanCreateDTO;
 import org.springframework.stereotype.Service;
 
 import com.trip.mukja.model.dto.plan.PlanDTO;
@@ -59,5 +56,30 @@ public class PlanServiceImpl implements PlanService {
 		return planMapper.searchDestination(keyword);
 	}
 
+	@Override
+	public void registDetailPlan(List<PlanInfoDTO> planInfos) {
+
+		planInfos = convertDayToDateTime(planInfos);
+		planMapper.registDetailPlan(planInfos);
+	}
+
+	@Override
+	public List<PlanDTO> getPlanners() {
+		return planMapper.getPlanners();
+	}
+
+	// String의 day 를 localDatetime으로 전환
+	public static List<PlanInfoDTO> convertDayToDateTime(List<PlanInfoDTO> planInfos) {
+		List<PlanInfoDTO> convertedPlanInfos = new ArrayList<>();
+
+		for (PlanInfoDTO planInfo : planInfos) {
+			String dayString = planInfo.getDay();
+			LocalDateTime dateTime = LocalDateTime.parse(dayString, DateTimeFormatter.ISO_DATE_TIME);
+			planInfo.setDayTime(dateTime);
+			convertedPlanInfos.add(planInfo);
+		}
+
+		return convertedPlanInfos;
+	}
 
 }

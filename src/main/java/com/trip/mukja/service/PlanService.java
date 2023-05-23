@@ -26,4 +26,8 @@ public interface PlanService {
 	List<LocalDateTime> getDays(LocalDateTime fDate, LocalDateTime lDate);
 
     List<PlanInfoDTO> searchDestination(String keyword);
+
+	void registDetailPlan(List<PlanInfoDTO> planInfos);
+
+    List<PlanDTO> getPlanners();
 }
