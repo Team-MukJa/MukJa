@@ -56,11 +56,11 @@ public class ReviewController {
     @ApiResponses({ @ApiResponse(code = 200, message = "관광지 검색 OK"), @ApiResponse(code = 500, message = "서버오류") })
     @ApiImplicitParams({@ApiImplicitParam(name = "sidoCode", value = "시도 코드", dataType = "int", paramType = "path"),
             @ApiImplicitParam(name = "gugunCode", value = "구군 코드", dataType = "int", paramType = "path"),
-            @ApiImplicitParam(name = "contentTypeId", value = "관광지 유형", dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "contentTypeId", value = "관광지 유형", dataType = "List<Integer>", paramType = "path"),
             @ApiImplicitParam(name = "keyword", value = "검색 키워드", dataType = "String", paramType = "path")})
     @GetMapping("/review/{sidoCode}/{gugunCode}/{contentTypeId}/{keyword}")
     public ResponseEntity<?> getSearchList(@PathVariable("sidoCode") int sidoCode, @PathVariable("gugunCode") int gugunCode,
-                                           @PathVariable("contentTypeId") int contentTypeId, @PathVariable("keyword") String keyword) {
+                                           @PathVariable("contentTypeId") List<Integer> contentTypeId, @PathVariable("keyword") String keyword) {
         logger.debug("getSearchList sidoCode : {}, gugunCode : {}, contentTypeId : {}, keyword : {}", sidoCode, gugunCode, contentTypeId, keyword);
         try {
             Map<String, Object> map = new HashMap<>();
