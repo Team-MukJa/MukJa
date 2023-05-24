@@ -4,6 +4,7 @@ import com.trip.mukja.model.dto.HotplaceDTO;
 import com.trip.mukja.model.dto.MemberDTO;
 import com.trip.mukja.model.dto.NoticeDTO;
 import com.trip.mukja.model.dto.ReviewDTO;
+import com.trip.mukja.model.dto.plan.PlanDTO;
 import com.trip.mukja.model.mapper.MemberMapper;
 import com.trip.mukja.model.mapper.MypageMapper;
 import com.trip.mukja.service.MemberService;
@@ -41,5 +42,15 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public List<ReviewDTO> getMyReview(String userId) {
 		return mypageMapper.getMyReview(userId);
+	}
+
+	@Override
+	public List<PlanDTO> getMyPlans(String userId) {
+		return mypageMapper.getMyPlans(userId);
+	}
+
+	@Override
+	public List<String> getMyPlanImages(int planId) {
+		return mypageMapper.getMyPlanImages(planId);
 	}
 }

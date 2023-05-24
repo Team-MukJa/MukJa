@@ -65,8 +65,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int modifyInfo(MemberDTO memberDTO) {
+		// encoder를 통하여 비밀번호를 암호화 시켜준다.
+		if(memberDTO.getUserPwd() != null) memberDTO.setUserPwd(encoder.encode(memberDTO.getUserPwd()));
 		return memberMapper.modifyInfo(memberDTO);
-
 	}
 
 	@Override

@@ -16,6 +16,7 @@ public class ReviewDTO {
 	private int reviewId;
 	private int placeId;
 	private String userId;
+	private String placeTitle;
 	private String content;
 	private int rating;
 	private String registerTime;

@@ -87,7 +87,7 @@ public class MemberController {
 	
 	@ApiOperation(value = "회원탈퇴", notes = "회원탈퇴", response = Map.class)
 	@ApiImplicitParam(name = "userId", value = "사용자 아이디", required = true, dataType = "String", paramType = "path")
-	@DeleteMapping("/")
+	@DeleteMapping("/{userId}")
 	public ResponseEntity<?> deleteMember(@PathVariable("userId") String userId) {
 		log.debug("탈퇴 아이디 : " + userId);
 		try {
@@ -101,7 +101,7 @@ public class MemberController {
 
 	
 	@ApiOperation(value = "회원정보수정", notes = "회원정보수정", response = Map.class)
-	@PutMapping(value ="/")
+	@PutMapping(value ="")
     @ApiImplicitParam(name = "userId", value = "사용자 아이디", required = true, dataType = "string", paramType = "path")
 	public ResponseEntity<?> modifyMemberInfo(@RequestBody MemberDTO memberDTO) {
 		try {

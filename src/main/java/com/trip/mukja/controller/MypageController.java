@@ -4,6 +4,7 @@ import com.trip.mukja.model.dto.HotplaceDTO;
 import com.trip.mukja.model.dto.MemberDTO;
 import com.trip.mukja.model.dto.NoticeDTO;
 import com.trip.mukja.model.dto.ReviewDTO;
+import com.trip.mukja.model.dto.plan.PlanDTO;
 import com.trip.mukja.service.MemberService;
 import com.trip.mukja.service.MypageService;
 import io.swagger.annotations.Api;
@@ -53,6 +54,21 @@ public class MypageController {
 		try {
 			List<HotplaceDTO> hotplaceDTO = mypageService.getMyHotplace(userId);
 			return new ResponseEntity<List<HotplaceDTO>>(hotplaceDTO, HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+
+	@ApiOperation(value = "여행계획 목록 가져오기", notes = "여행계획 목록 가져오기", response = Map.class)
+	@GetMapping(value ="/plan/{userId}")
+	@ApiImplicitParam(name = "userId", value = "사용자 아이디", required = true, dataType = "String", paramType = "path")
+	public ResponseEntity<?> getPlan(@PathVariable("userId") String userId) {
+		try {
+			List<PlanDTO> plans = mypageService.getMyPlans(userId);
+			for(PlanDTO plan : plans){
+				plan.setRepresentativeImage(mypageService.getMyPlanImages(plan.getPlanId()));
+			}
+			return new ResponseEntity<List<PlanDTO>>(plans, HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}

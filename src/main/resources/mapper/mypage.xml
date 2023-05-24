@@ -34,10 +34,23 @@
 		<result column="review_id" property="reviewId" />
 		<result column="place_id" property="placeId" />
 		<result column="user_id" property="userId" />
+		<result column="title" property="placeTitle" />
 		<result column="content" property="content" />
 		<result column="rating" property="rating" />
 		<result column="register_time" property="registerTime" />
 		<result column="user_name" property="userName" />
+	</resultMap>
+
+	<resultMap type="planDTO" id="plan" >
+		<result column="plan_id" property="planId"/>
+		<result column="user_id" property="userId"/>
+		<result column="subject" property="subject"/>
+		<result column="content" property="content"/>
+		<result column="hit" property="hit"/>
+		<result column="like" property="like"/>
+		<result column="f_date" property="fDate"/>
+		<result column="l_date" property="lDate"/>
+		<result column="w_date" property="wDate"/>
 	</resultMap>
 
 	<select id="getUser" parameterType="String" resultMap="member">
@@ -61,10 +74,24 @@
 	</select>
 
 	<select id="getMyReview" parameterType="String" resultMap="review">
-		select r.review_id, r.place_id, r.user_id, r.content, r.rating, r.register_time, m.user_name
-		from review r, members m
-		where r.user_id = m.user_id
-		  and r.user_id = #{userId}
+		select r.review_id, r.place_id, ai.title, r.user_id, r.content, r.rating, r.register_time, m.user_name
+		from review r join members m
+		on r.user_id = m.user_id
+		join attraction_info ai
+		on r.place_id = ai.content_id
+		where r.user_id = #{userId}
 	</select>
 
+	<select id="getMyPlans" parameterType="String" resultMap="plan">
+		select *
+		from plan
+		where user_id = #{userId}
+	</select>
+
+	<select id="getMyPlanImages" parameterType="int" resultType="String">
+		select img
+		from plan_info
+		where plan_p_id = #{planId}
+		limit 4
+	</select>
 </mapper>
