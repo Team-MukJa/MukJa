@@ -1,11 +1,9 @@
 package com.trip.mukja.service;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.trip.mukja.model.dto.plan.PlanCreateDTO;
 import com.trip.mukja.model.dto.plan.PlanDTO;
 import com.trip.mukja.model.dto.plan.PlanInfoDTO;
 
@@ -30,4 +28,6 @@ public interface PlanService {
 	void registDetailPlan(List<PlanInfoDTO> planInfos);
 
     List<PlanDTO> getPlanners();
+
+    List<String> getPlanImages(int planId);
 }

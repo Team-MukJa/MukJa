@@ -33,6 +33,8 @@ public class PlanDTO {
 	private String startDate;
 	private String endDate;
 
+	private List<String> representativeImage;
+
 	public void getLocalDateTime() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		// selectedDate를 LocalDateTime으로 변환하여 반환

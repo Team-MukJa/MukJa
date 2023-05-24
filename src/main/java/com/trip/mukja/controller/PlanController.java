@@ -43,11 +43,25 @@ public class PlanController {
         return ResponseEntity.ok().body(planDTO);
     }
 
+    @ApiOperation(value = "여행 플래너", notes = "여행 플래너 작성 API")
+
     @GetMapping
     public ResponseEntity<?> getPlanners() {
+        List<PlanDTO> plans = planService.getPlanners();
 
-        return ResponseEntity.ok().body(planService.getPlanners());
+        for (PlanDTO planDTO: plans) {
+            log.info("planDTO{}",planDTO);
+
+            log.info("id {}",planDTO.getPlanId());
+            planDTO.setRepresentativeImage(planService.getPlanImages(planDTO.getPlanId()));
+            log.info("planDTO{}",planDTO);
+
+        }
+
+        return ResponseEntity.ok().body(plans);
     }
+
+
 
     @ApiOperation(value = "여행 플래너 검색", notes = "여행 플래너 검색 API")
     @GetMapping("/search/{keyword}")

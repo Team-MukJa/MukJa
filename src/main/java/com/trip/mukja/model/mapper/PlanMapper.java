@@ -23,4 +23,6 @@ public interface PlanMapper {
 	void registDetailPlan(List<PlanInfoDTO> planInfos);
 
     List<PlanDTO> getPlanners();
+
+    List<String> getPlanImages(int planId);
 }
