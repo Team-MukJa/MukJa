@@ -1,5 +1,6 @@
 package com.trip.mukja.controller;
 
+import com.trip.mukja.model.dto.plan.PlanCalDTO;
 import com.trip.mukja.model.dto.plan.PlanCreateDTO;
 import com.trip.mukja.model.dto.plan.PlanDTO;
 import com.trip.mukja.model.dto.plan.PlanInfoDTO;
@@ -43,6 +44,8 @@ public class PlanController {
         return ResponseEntity.ok().body(planDTO);
     }
 
+
+
     @ApiOperation(value = "여행 플래너", notes = "여행 플래너 작성 API")
 
     @GetMapping
@@ -60,6 +63,7 @@ public class PlanController {
 
         return ResponseEntity.ok().body(plans);
     }
+
 
 
 
@@ -85,5 +89,31 @@ public class PlanController {
         return ResponseEntity.ok().body(1);
     }
 
+    @ApiOperation(value = "상세 계획", notes = "여행 플래너 검색 API")
 
+    @GetMapping("/detail/{planId}")
+    public ResponseEntity<?> getDetailPlan(@PathVariable int planId){
+
+       List<PlanInfoDTO> list =  planService.getDetailPlan(planId);
+
+
+        return ResponseEntity.ok().body(list);
+
+    }
+    @ApiOperation(value = "날짜", notes = "여행 플래너 검색 API")
+
+    @GetMapping("/detail/date/{planId}")
+    public ResponseEntity<?> getPlanDate(@PathVariable int planId){
+
+        PlanCalDTO planDate =  planService.getPlanDate(planId);
+
+        List<LocalDateTime> list = planService.getDays(planDate.getFDate(),planDate.getLDate());
+
+        log.info("list : {}",list);
+
+        List<String> afterFormat = planService.formatterDateToString(list);
+
+        log.info("afterFormat : {}",afterFormat);
+        return ResponseEntity.ok().body(afterFormat);
+    }
 }

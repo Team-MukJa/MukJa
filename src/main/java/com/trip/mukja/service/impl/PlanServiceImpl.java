@@ -1,17 +1,17 @@
 package com.trip.mukja.service.impl;
 
+import com.trip.mukja.model.dto.plan.PlanCalDTO;
+import com.trip.mukja.model.dto.plan.PlanDTO;
+import com.trip.mukja.model.dto.plan.PlanInfoDTO;
+import com.trip.mukja.model.mapper.PlanMapper;
+import com.trip.mukja.service.PlanService;
+import org.springframework.stereotype.Service;
+
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.stereotype.Service;
-
-import com.trip.mukja.model.dto.plan.PlanDTO;
-import com.trip.mukja.model.dto.plan.PlanInfoDTO;
-import com.trip.mukja.model.mapper.PlanMapper;
-import com.trip.mukja.service.PlanService;
 
 @Service
 public class PlanServiceImpl implements PlanService {
@@ -72,6 +72,27 @@ public class PlanServiceImpl implements PlanService {
 	public List<String> getPlanImages(int planId) {
 
 		return planMapper.getPlanImages(planId);
+	}
+
+	@Override
+	public List<PlanInfoDTO> getDetailPlan(int planId) {
+		return planMapper.getDetailPlan(planId);
+	}
+
+	@Override
+	public PlanCalDTO getPlanDate(int planId) {
+		return planMapper.getPlanDate(planId);
+	}
+
+	@Override
+	public List<String> formatterDateToString(List<LocalDateTime> dates) {
+		List<String> stringList = new ArrayList<>();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		for (LocalDateTime localDateTime : dates) {
+			String formattedString = localDateTime.format(formatter);
+			stringList.add(formattedString);
+		}
+		return stringList;
 	}
 
 	// String의 day 를 localDatetime으로 전환

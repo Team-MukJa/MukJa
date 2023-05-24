@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.trip.mukja.model.dto.plan.PlanCalDTO;
 import com.trip.mukja.model.dto.plan.PlanDTO;
 import com.trip.mukja.model.dto.plan.PlanInfoDTO;
 
@@ -30,4 +31,10 @@ public interface PlanService {
     List<PlanDTO> getPlanners();
 
     List<String> getPlanImages(int planId);
+
+	List<PlanInfoDTO> getDetailPlan(int planId);
+
+	PlanCalDTO getPlanDate(int planId);
+
+	List<String> formatterDateToString(List<LocalDateTime> dates);
 }

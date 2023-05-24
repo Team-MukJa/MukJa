@@ -6,14 +6,14 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
 @ToString
 public class PlanCalDTO {
-    private List<LocalDate> days;
-    private int planId;
-    private String userId;
-    private String subject;
+    private LocalDateTime fDate;
+    private LocalDateTime lDate;
+
 }
