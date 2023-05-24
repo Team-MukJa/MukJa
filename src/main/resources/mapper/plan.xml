@@ -28,6 +28,12 @@
         <result column="y" property="y"/>
     </resultMap>
 
+    <resultMap id="planDate" type="planCalDTO">
+        <result column="f_date" property="fDate"/>
+        <result column="l_date" property="lDate"/>
+
+    </resultMap>
+
 <!--     추후에 login시 user_id 정보를 가져와야함 -->
     <insert id="makePlanner" parameterType="planDTO" useGeneratedKeys="true" keyProperty="planId">
         insert into plan(subject, content, f_date, l_date, user_id)
@@ -66,6 +72,12 @@
         from plan
     </select>
 
+    <select id="getPlanDate" resultMap="planDate">
+        select f_date, l_date
+        from plan
+        where plan_id =  ${planId}
+    </select>
+
     <select id="getPlanImages"  parameterType="int" resultType="String">
         select img
         from plan_info
@@ -73,5 +85,9 @@
         limit 4
     </select>
 
-
+    <select id="getDetailPlan" parameterType="int" resultMap="planInfo">
+        select *
+        from plan_info
+        where plan_p_id = ${planId}
+    </select>
 </mapper>

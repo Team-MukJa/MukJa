@@ -3,6 +3,7 @@ package com.trip.mukja.model.mapper;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.trip.mukja.model.dto.plan.PlanCalDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.trip.mukja.model.dto.plan.PlanDTO;
@@ -25,4 +26,8 @@ public interface PlanMapper {
     List<PlanDTO> getPlanners();
 
     List<String> getPlanImages(int planId);
+
+	List<PlanInfoDTO> getDetailPlan(int planId);
+
+	PlanCalDTO getPlanDate(int planId);
 }
