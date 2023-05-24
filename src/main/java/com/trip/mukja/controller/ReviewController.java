@@ -84,7 +84,7 @@ public class ReviewController {
             map.put("contentTypeId", contentTypeId);
             map.put("keyword", keyword);
             List<SearchDTO> searchDTO = reviewService.getSearchList(map);
-            if (searchDTO.size()==0) {
+            if (searchDTO.size()!=0) {
                 logger.info("searchDTO : {}",searchDTO.toString());
                 return new ResponseEntity<List<SearchDTO>>(searchDTO, HttpStatus.OK);
             } else {
