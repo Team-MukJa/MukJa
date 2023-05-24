@@ -41,6 +41,18 @@
 		<result column="user_name" property="userName" />
 	</resultMap>
 
+	<resultMap type="planDTO" id="plan" >
+		<result column="plan_id" property="planId"/>
+		<result column="user_id" property="userId"/>
+		<result column="subject" property="subject"/>
+		<result column="content" property="content"/>
+		<result column="hit" property="hit"/>
+		<result column="like" property="like"/>
+		<result column="f_date" property="fDate"/>
+		<result column="l_date" property="lDate"/>
+		<result column="w_date" property="wDate"/>
+	</resultMap>
+
 	<select id="getUser" parameterType="String" resultMap="member">
 		select
 		user_id, user_name, email_id, email_domain, join_date, role
@@ -70,4 +82,16 @@
 		where r.user_id = #{userId}
 	</select>
 
+	<select id="getMyPlans" parameterType="String" resultMap="plan">
+		select *
+		from plan
+		where user_id = #{userId}
+	</select>
+
+	<select id="getMyPlanImages" parameterType="int" resultType="String">
+		select img
+		from plan_info
+		where plan_p_id = #{planId}
+		limit 4
+	</select>
 </mapper>
