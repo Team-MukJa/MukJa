@@ -19,6 +19,7 @@ public class PlanInfoDTO {
 	private String img;
 	private String content;
 	private int contentId;
+	private int contentTypeId;
 	private String addr;
 	private String subject;
 
