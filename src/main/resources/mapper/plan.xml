@@ -22,6 +22,7 @@
         <result column="content_id" property="contentId"/>
         <result column="img" property="img"/>
         <result column="content" property="content"/>
+        <result column="content_type_id" property="contentTypeId"/>
         <result column="subject" property="subject"/>
         <result column="addr" property="addr"/>
         <result column="x" property="x"/>
@@ -42,10 +43,10 @@
 
 
     <select id="searchDestination" parameterType="String" resultMap="planInfo">
-        select ai.content_id, ai.title subject, ai.addr1 addr, ai.first_image img, ad.overview content, ai.latitude x, ai.longitude y
+        select ai.content_type_id, ai.content_id, ai.title subject, ai.addr1 addr, ai.first_image img, ad.overview content, ai.latitude x, ai.longitude y
         from attraction_info ai, attraction_description ad
         where ai.content_id = ad.content_id
-          and ai.content_type_id = 12 and ai.title LIKE CONCAT('%', #{keyword}, '%')
+          and ai.title LIKE CONCAT('%', #{keyword}, '%')
     </select>
 
     <insert id="registDetailPlan" parameterType="java.util.List">
