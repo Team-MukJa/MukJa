@@ -39,6 +39,16 @@
 ## :heavy_check_mark: ERD 다이어그램
 ![Image Pasted at 2023-4-14 17-15](https://user-images.githubusercontent.com/107923409/232202431-07efeb42-de16-44e1-b84f-1423378274d9.png)
 
+## :heavy_check_mark: 핵심기능
+- 로그인/회원가입 : Spring Security, JWT를 이용하여 인증, 인가, 비밀번호 암호화 구현
+- 여행 계획 : 일자별 여행 계획 등록, 여행지 검색 후 선택, 일차 순으로 여행 계획 보기 
+- 리뷰 : 검색한 여행지에 대한 리뷰 및 별점 등록
+- 핫플레이스 : 카카오 api를 이용하여 장소 검색, 본인이 찍은 사진을 업로드해 핫플레이스 공유
+- 마이페이지 : 자신이 쓴 글 확인
+
+## :heavy_check_mark: 기능별 화면
+- 여행 계획 
+
 ## **:sparkles: commit 규칙**
 - feat: 새로운 파일 추가
 - modify: 기능 변경
