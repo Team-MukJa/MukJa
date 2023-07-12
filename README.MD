@@ -47,7 +47,14 @@
 - 마이페이지 : 자신이 쓴 글 확인
 
 ## :heavy_check_mark: 기능별 화면
-- 여행 계획 
+- 여행 계획
+![여행 계획 작성](https://github.com/Team-MukJa/MukJa/assets/107923409/f2cf6c37-0813-4c35-a834-3221a846138b)
+![여행 상세보기 작성](https://github.com/Team-MukJa/MukJa/assets/107923409/b851380e-7b8d-4539-8761-0bb99b7aa210)
+- 여행 리뷰 
+![여행지 검색 리뷰](https://github.com/Team-MukJa/MukJa/assets/107923409/e0c04c13-a500-44c1-ba5a-1fbee5e55caf)
+- 공지사항
+![공지사항](https://github.com/Team-MukJa/MukJa/assets/107923409/09c31b58-0391-49af-9580-65fec04c3a6d)
+
 
 ## **:sparkles: commit 규칙**
 - feat: 새로운 파일 추가
