@@ -47,6 +47,8 @@
 - 마이페이지 : 자신이 쓴 글 확인
 
 ## :heavy_check_mark: 기능별 화면
+- 메인 화면
+![메인화면](https://github.com/Team-MukJa/MukJa/assets/101040824/5e79a8fc-1998-494c-aa1f-fb83da92f57f)
 - 여행 계획
 ![여행 계획 작성](https://github.com/Team-MukJa/MukJa/assets/107923409/f2cf6c37-0813-4c35-a834-3221a846138b)
 ![여행 상세보기 작성](https://github.com/Team-MukJa/MukJa/assets/107923409/b851380e-7b8d-4539-8761-0bb99b7aa210)
