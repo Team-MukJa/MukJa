@@ -54,6 +54,8 @@
 ![여행지 검색 리뷰](https://github.com/Team-MukJa/MukJa/assets/107923409/e0c04c13-a500-44c1-ba5a-1fbee5e55caf)
 - 공지사항
 ![공지사항](https://github.com/Team-MukJa/MukJa/assets/107923409/09c31b58-0391-49af-9580-65fec04c3a6d)
+- 핫플레이스
+![핫플레이스 작성](https://github.com/Team-MukJa/MukJa/assets/101040824/cf251e3b-b735-4a96-8da6-cd9f0d4b08f2)
 
 
 ## **:sparkles: commit 규칙**
