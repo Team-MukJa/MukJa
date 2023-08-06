@@ -46,7 +46,7 @@
         select ai.content_type_id, ai.content_id, ai.title subject, ai.addr1 addr, ai.first_image img, ad.overview content, ai.latitude x, ai.longitude y
         from attraction_info ai, attraction_description ad
         where ai.content_id = ad.content_id
-          and ai.title LIKE CONCAT('%', #{keyword}, '%')
+          and ai.content_type_id in (12 ,32, 39) and ai.title LIKE CONCAT('%', #{keyword}, '%')
     </select>
 
     <insert id="registDetailPlan" parameterType="java.util.List">
