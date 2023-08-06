@@ -15,11 +15,21 @@
 	</resultMap>
 
 	<resultMap type="hotplaceDTO" id="hotplace">
-		<result column="place_id" property="placeId" />
-		<result column="user_id" property="userId" />
-		<result column="subject" property="subject" />
-		<result column="register_time" property="registerTime" />
-		<result column="img" property="img" />
+		<result column="place_id" property="placeId"/>
+		<result column="register_time" property="registerTime"/>
+		<result column="subject" property="subject"/>
+		<result column="trip_day" property="tripDay"/>
+		<result column="category" property="category"/>
+		<result column="content" property="content"/>
+		<result column="hit" property="hit"/>
+		<result column="user_id" property="userId"/>
+		<result column="place_name" property="placeName"/>
+		<result column="place_address" property="placeAddress"/>
+		<result column="place_x" property="placeX"/>
+		<result column="place_y" property="placeY"/>
+		<result column="like" property="like"/>
+		<result column="save_file" property="saveFile"/>
+		<result column="save_folder" property="saveFolder"/>
 	</resultMap>
 
 	<resultMap type="noticeDTO" id="notice">
@@ -61,9 +71,10 @@
 	</select>
 
 	<select id="getMyHotplace" parameterType="String" resultMap="hotplace">
-		select place_id, user_id, subject, img, register_time
-		from hot_place
-		where user_id = #{userId}
+		select h.place_id, h.register_time, h.subject, h.trip_day, h.category, h.content, h.hit, h.user_id, h.place_name, h.place_address, h.place_x, h.place_y, h.like, f.save_file, f.save_folder
+		from hot_place h, file_info f
+		where h.place_id=f.place_id
+		and user_id = #{userId}
 	</select>
 
 	<select id="getMyNotice" parameterType="String" resultMap="notice">
